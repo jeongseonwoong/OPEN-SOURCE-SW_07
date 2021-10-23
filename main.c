@@ -5,9 +5,9 @@ int arrangenum()
   int n[MAX]={1};
   while(n[0]>0)
   {
-    int i=0,j=0,,times=0,ptr;
+    int i=0,j=0,times=0,ptr;
     float ave,result=0;
-    printf("Enter integers>>");
+    printf("Enter integers>> ");
     while(scanf_s("%d",&n[i])>0)
     {
       if(n[i]<0)
@@ -18,10 +18,7 @@ int arrangenum()
       i++;
       times++;
     }
-    			if (n[i] < 0)
-			{
-				break;
-			}
+   
     ave=result/times;
     for(i=0;i<times-1;i++)
     {
