@@ -32,11 +32,12 @@ int arrangenum()
           }  
       }
     }
+    printf("  Entered integers>> ");
     for(i=0;i<times;i++)
     {
         printf("%d ",n[i]);
     }
-    printf("\t The average is %-6.2f\n",ave);
+    printf("\n  The average is %-6.2f\n",ave);
  }
  return 0;
 }
