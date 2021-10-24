@@ -37,7 +37,14 @@ int arrangenum()
     {
         printf("%d ",n[i]);
     }
-    printf("\n  The average is %-6.2f\n",ave);
+		if (n[0]<0)
+		{
+			printf("\n  Exit. . .\n");
+		}
+		else
+		{
+			printf("\n  The average is %-6.2f\n", ave);
+		}
  }
  return 0;
 }
