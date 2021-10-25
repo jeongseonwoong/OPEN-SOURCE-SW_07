@@ -10,6 +10,12 @@ int arrangenum()
     printf("Enter integers>> ");
     while(scanf_s("%d",&n[i])>0)
     {
+      if (flag == 0)
+      {
+        min = n[0];
+        max = n[0];
+        flag = 1;
+      }
       if(n[i]<0)
       {
         break;
@@ -36,17 +42,17 @@ int arrangenum()
           }  
       }
     }
-    printf("  Entered integers>> ");
-    for(i=0;i<times;i++)
-    {
-        printf("%d ",n[i]);
-    }
 		if (n[0]<0)
 		{
 			printf("\n  Exit. . .\n");
 		}
 		else
 		{
+			 printf("  Entered integers>> ");
+            for (i = 0; i < times; i++)
+            {
+                printf("%d ", n[i]);
+            }
 			printf("\n  Maximum : %d, Minimum : %d", max, min);
 			printf("\n  The average is %-6.2f\n\n", ave);
 		}
