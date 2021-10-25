@@ -5,7 +5,7 @@ int arrangenum()
   int n[MAX]={1};
   while(n[0]>0)
   {
-    int i=0,j=0,times=0,ptr;
+    int i=0,j=0,times=0,ptr,max = 0, min = 0;
     float ave,result=0;
     printf("Enter integers>> ");
     while(scanf_s("%d",&n[i])>0)
@@ -14,6 +14,10 @@ int arrangenum()
       {
         break;
       }
+      if (n[i] < min)
+                min = n[i];
+      else if (n[i] > max)
+                max = n[i];
       result=result+n[i];
       i++;
       times++;
@@ -43,7 +47,8 @@ int arrangenum()
 		}
 		else
 		{
-			printf("\n  The average is %-6.2f\n", ave);
+			printf("\n  Maximum : %d, Minimum : %d", max, min);
+			printf("\n  The average is %-6.2f\n\n", ave);
 		}
  }
  return 0;
