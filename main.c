@@ -5,7 +5,7 @@ int arrangenum()
   int n[MAX]={1};
   while(n[0]>0)
   {
-    int i=0,j=0,times=0,ptr,max = 0, min = 0;
+    int i=0,j=0,times=0,ptr,max = 0, min = 0, flag = 0;
     float ave,result=0;
     printf("Enter integers>> ");
     while(scanf_s("%d",&n[i])>0)
