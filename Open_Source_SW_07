@@ -1,7 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include<time.h>
 #define MAX 100
+FILE* fp;
 int dday()
 {
 	char eixt[MAX] = "asd";
@@ -119,25 +121,44 @@ int dday()
 	printf("\n%d년 %d개월 %d일 남았습니다.\n", year, month, day);
 	return 0;
 }
+
+void calender()
+{
+	time_t timer = 0;
+	struct tm t;
+	timer = time(NULL);
+	localtime_s(&t, &timer);
+	int date[MAX], i = 0;
+	fopen_s(&fp, "calender.xlsx", "r");
+	while (fp != NULL)
+	{
+		while (fscanf_s(fp, "%d", &date[i]) != EOF)
+		{
+
+		}
+	}
+
+}
+
 int main()
 {
 	int select;
-		printf("실행할 프로그램을 선택하세요\n");
-		printf("수능 d-day (press '1')\n");
-		printf("시간표 (press '2')\n");
-		printf("시험 d-dya(press '3')\n");
-		scanf_s("%d", &select);
-		if (select == 1)
-		{
-			dday();
-		}
-		else if (select == 2)
-		{
+	printf("실행할 프로그램을 선택하세요\n");
+	printf("수능 d-day (press '1')\n");
+	printf("시간표 (press '2')\n");
+	printf("시험 d-dya(press '3')\n");
+	scanf_s("%d", &select);
+	if (select == 1)
+	{
+		dday();
+	}
+	else if (select == 2)
+	{
+		calender();
+	}
+	else if (select == 3)
+	{
 
-		}
-		else if (select == 3)
-		{
-
-		}
+	}
 
 }
