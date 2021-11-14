@@ -3,7 +3,7 @@
 #include<string.h>
 #include<time.h>
 #define MAX 100
-FILE* fp;
+FILE* fpcal;
 int dday()
 {
 	char eixt[MAX] = "asd";
@@ -128,15 +128,96 @@ void calender()
 	struct tm t;
 	timer = time(NULL);
 	localtime_s(&t, &timer);
-	int date[MAX], i = 0;
-	fopen_s(&fp, "calender.xlsx", "r");
-	while (fp != NULL)
-	{
-		while (fscanf_s(fp, "%d", &date[i]) != EOF)
-		{
+	int date[MAX],date1[MAX], i = 0,dal,neon,day;
+	fopen_s(&fpcal, "calender.txt", "r");
+	neon = (t.tm_year - 100)*100;
+	dal=t.tm_mon+neon+1;
 
+	while (fpcal != NULL)
+	{
+		int count_99 = 0;
+		while (fscanf_s(fpcal, "%d", &date[i]) !=dal)
+		{
+			if (date[i] == dal)
+			{
+				break;
+			}
+			i++;
 		}
+		printf("%d년 %d월\n", t.tm_year + 1900, t.tm_mon + 1);
+		i++;
+		while (fscanf_s(fpcal, "%d", &date[i]) <2100)
+		{
+			if (date[i] > 2100||count_99==4)
+			{
+				break;
+			}
+			if (date[i] == 99)
+			{
+				printf("\n");
+				i++;
+				count_99++;
+				continue;
+			}
+			if (date[i] != 0)
+			{
+				printf("|%2d|", date[i]);
+			}
+			if (date[i] == 0)
+			{
+				printf("    ");
+			}
+			i++;
+		}
+		fclose(fpcal);
+		break;
 	}
+	int enter,sum, count_99 = 0;
+	i = 0;
+	printf("출력할 달력의 달을 입력하세요:");
+	scanf_s("%d", &enter);
+	sum = enter + neon;
+	fopen_s(&fpcal, "calender.txt", "r");
+	while (fpcal != NULL)
+	{
+		while (fscanf_s(fpcal, "%d", &date1[i]) != sum)
+		{
+			if (date1[i] == sum)
+			{
+				break;
+			}
+			i++;
+		}
+		printf("\n%d년 %d월\n", t.tm_year + 1900, enter);
+		i++;
+		while (fscanf_s(fpcal, "%d", &date1[i]) <2100)
+		{
+			if (date1[i] > 2100||count_99==6)
+			{
+				break;
+			}
+			if (date1[i] == 99)
+			{
+				printf("\n");
+				i++;
+				count_99++;
+				continue;
+			}
+			if (date1[i] != 0)
+			{
+				printf("|%2d|", date1[i]);
+			}
+			if (date1[i] == 0)
+			{
+				printf("    ");
+			}
+			i++;
+		}
+		break;
+	}
+	printf("일정을 확인하거나 첨삭할 날짜를 고르세요");
+	scanf_s("%d", &day);//연결리스트를 이용할 예정
+
 
 }
 
