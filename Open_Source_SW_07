@@ -6,27 +6,196 @@
 FILE* fpcal;
 int dday()
 {
-	char eixt[MAX] = "asd";
-	char wantexit[MAX] = "exit";
 	int i = 0, j = 0;
-	char suneong[MAX];
-	int year, month, day, save, tmp = 0;// 2021-11-06
+	char suneong[MAX], date[MAX];
+	int year, month, day, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, save;// 2021-11-06
 	const char s2022[MAX] = "2021-11-18";
 	const char s2023[MAX] = "2022-11-17";
 	const char s2024[MAX] = "2023-11-16";
 	const char s2025[MAX] = "2024-11-14";
-	char f[MAX] = "2022", s[MAX] = "2023", t[MAX] = "2024", fo[MAX] = "2025";
-	char date[MAX];
+	time_t timer = 0;
+	struct tm t;
+	timer = time(NULL);
+	localtime_s(&t, &timer);
 	printf("수능 D-Day 계산 프로그램입니다.\n");
-	printf("오늘 날짜를 입력해 주세요(ex:2021-04-06):\n");
-	scanf_s("%s", date, MAX);
-	printf("몇 학년도 수능을 보는지 입력하세요(ex:2022):\n");
-	scanf_s("%s", suneong, MAX);
-	if (strcmp(suneong, fo) > 0)
+	printf("오늘은 %d년,%d월 %d일입니다.\n", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
+	printf("몇 학년도 수능을 보는지 입력하세요(ex:2022):");
+	scanf_s("%s", suneong, 9);
+	if (strcmp(suneong, "2025") > 0)
 	{
 		printf("수능 예정일이 정해지지 않았습니다.\n");
 		return 0;
 	}
+	if (strcmp(suneong, "2022") < 0)
+	{
+		printf("이미 지나간 수능 날짜입니다.\n");
+		return 0;
+	}
+	if (strcmp(suneong, "2022") == 0)
+	{
+		while (s2022[j] != '-')
+		{
+			tmp = tmp * 10 + (int)(s2022[j] - 48);
+			j++;
+		}
+	}
+	if (strcmp(suneong, "2023") == 0)
+	{
+		while (s2023[j] != '-')
+		{
+			tmp = tmp * 10 + (int)(s2023[j] - 48);
+			j++;
+		}
+	}
+	if (strcmp(suneong, "2024") == 0)
+	{
+		while (s2022[j] != '-')
+		{
+			tmp = tmp * 10 + (int)(s2024[j] - 48);
+			j++;
+		}
+	}
+	if (strcmp(suneong, "2025") == 0)
+	{
+		while (s2022[j] != '-')
+		{
+			tmp = tmp * 10 + (int)(s2025[j] - 48);
+			j++;
+		}
+	}
+	year = tmp - (t.tm_year + 1900);
+	month = 11 - (t.tm_mon + 1);
+	tmp = 0;
+	int mmon = (t.tm_mon + 1);
+	if (strcmp(suneong, "2022") == 0)
+	{
+		j = 8;
+		while (s2022[j] != '\0')
+		{
+			tmp = tmp * 10 + (int)(s2022[j] - 48);
+			j++;
+		}
+		if (tmp < t.tm_mday)
+		{
+			month--;
+			day = 31 - t.tm_mday;
+			day = day + tmp;
+		}
+		else
+		{
+			day = tmp - t.tm_mday;
+		}
+	}
+	else if (strcmp(suneong, "2023") == 0)
+	{
+		j = 8;
+		while (s2023[j] != '\0')
+		{
+			tmp = tmp * 10 + (int)(s2023[j] - 48);
+			j++;
+		}
+		if (tmp < t.tm_mday)
+		{
+			month--;
+			day = 31 - t.tm_mday;
+			day = day + tmp;
+		}
+		else
+		{
+			day = tmp - t.tm_mday;
+		}
+	}
+	else if (strcmp(suneong, "2024") == 0)
+	{
+		j = 8;
+		while (s2024[j] != '\0')
+		{
+			tmp = tmp * 10 + (int)(s2024[j] - 48);
+			j++;
+		}
+		if (tmp < t.tm_mday)
+		{
+			month--;
+			day = 31 - t.tm_mday;
+			day = day + tmp;
+		}
+		else
+		{
+			day = tmp - t.tm_mday;
+		}
+	}
+	else if (strcmp(suneong, "2025") == 0)
+	{
+		j = 8;
+		while (s2025[j] != '\0')
+		{
+			tmp = tmp * 10 + (int)(s2025[j] - 48);
+			j++;
+		}
+		if (tmp < t.tm_mday)
+		{
+			month--;
+			day = 31 - t.tm_mday;
+			day = day + tmp;
+		}
+		else
+		{
+			day = tmp - t.tm_mday;
+		}
+	}
+	if (month < 0)
+	{
+		year--;
+		month = 12 + month;
+	}
+	if (year < 0)
+	{
+		printf("이미 지나간 수능 날짜입니다.");
+	}
+	else
+	{
+		printf("%d년 %d개월 %d일 남았습니다.\n", year, month, day);
+	}
+	i = 0;
+	j = 0;
+	printf("입력하고싶은 임의의 날짜를 입력하세요(ex:2021-06-11):");
+	scanf_s("%s", date, MAX);
+	while (date)
+	{
+		if (date[0] > '2' || date[1] > '0' || date[2] > '2' || date[3] > '6' || date[5] > '1' || date[8] > '3')
+		{
+			printf("이상한 날짜를 입력하신 것 아닙니까? 다시 입력해주세요:");
+			scanf_s("%s", date, MAX);
+		}
+		else if (date[5] > '0' && date[6] > '2')
+		{
+			printf("이상한 날짜를 입력하신 것 아닙니까? 다시 입력해주세요:");
+			scanf_s("%s", date, MAX);
+		}
+		else if (date[8] >= '3' && date[9] > '1')
+		{
+			printf("이상한 날짜를 입력하신 것 아닙니까? 다시 입력해주세요:");
+			scanf_s("%s", date, MAX);
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	printf("몇 학년도 수능을 보는지 입력하세요(ex:2022):");
+	scanf_s("%s", suneong, MAX);
+	if (strcmp(suneong, "2025") > 0)
+	{
+		printf("수능 예정일이 아직 정해지지 않았습니다.");
+		return 0;
+	}
+	if (strcmp(suneong, "2022") < 0)
+	{
+		printf("이미 지나간 수능 날짜입니다.");
+		return 0;
+	}
+	tmp = 0;
 	while (date[i] != '-')
 	{
 		tmp = tmp * 10 + (int)(date[i] - 48);
@@ -50,7 +219,7 @@ int dday()
 	month = 11 - tmp;
 	i++;
 	tmp = 0;
-	j = 0;
+	j = 8;
 	if (strcmp(suneong, "2022") == 0)
 	{
 		while (date[i] != '\0')
@@ -60,9 +229,9 @@ int dday()
 		}
 		save = tmp;
 		tmp = 0;
-		while (s2022[8 + j] != '\0')
+		while (s2022[j] != '\0')
 		{
-			tmp = tmp * 10 + (int)(s2022[8 + j] - 48);
+			tmp = tmp * 10 + (int)(s2022[j] - 48);
 			j++;
 		}
 		day = tmp - save;
@@ -77,9 +246,9 @@ int dday()
 		}
 		save = tmp;
 		tmp = 0;
-		while (s2023[8 + j] != '\0')
+		while (s2023[j] != '\0')
 		{
-			tmp = tmp * 10 + (int)(s2023[8 + j] - 48);
+			tmp = tmp * 10 + (int)(s2023[j] - 48);
 			j++;
 		}
 		day = tmp - save;
@@ -94,9 +263,9 @@ int dday()
 		}
 		save = tmp;
 		tmp = 0;
-		while (s2024[8 + j] != '\0')
+		while (s2024[j] != '\0')
 		{
-			tmp = tmp * 10 + (int)(s2024[8 + j] - 48);
+			tmp = tmp * 10 + (int)(s2024[j] - 48);
 			j++;
 		}
 		day = tmp - save;
@@ -111,14 +280,34 @@ int dday()
 		}
 		save = tmp;
 		tmp = 0;
-		while (s2025[8 + j] != '\0')
+		while (s2025[j] != '\0')
 		{
-			tmp = tmp * 10 + (int)(s2025[8 + j] - 48);
+			tmp = tmp * 10 + (int)(s2025[j] - 48);
 			j++;
 		}
 		day = tmp - save;
 	}
-	printf("\n%d년 %d개월 %d일 남았습니다.\n", year, month, day);
+	if (day < 0)
+	{
+		month--;
+		day = 31 + day;
+	}
+	if (month < 0)
+	{
+		year--;
+		month = 12 + month;
+	}
+	if (year < 0)
+	{
+		printf("이미 지나간 수능 날짜입니다.");
+	}
+	else
+	{
+		printf("%d년 %d개월 %d일 남았습니다.", year, month, day);
+	}
+	syear = syear * year;
+	smonth;
+
 	return 0;
 }
 
