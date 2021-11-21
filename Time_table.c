@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-#include <stdio.h>
+
 
 #define MAX 50
 
@@ -17,7 +17,7 @@ void print_date(int i)
     else if (i == 5)printf("Sat ");
 }
 
-int main()
+void  time_table()
 {
     FILE *in;
     char arr[13][6][MAX];
@@ -49,7 +49,6 @@ int main()
           printf("\n");
       }
       fclose(in);
-      return 0;
 
       //read file
 
