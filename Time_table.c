@@ -1,5 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
-
+#include "Time_table.h"
 
 #define MAX 50
 
@@ -29,7 +29,7 @@ void  time_table()
     {
       for (int i = 0; i < 13; i++)
       {
-          for (int j = 0; i < 6; j++)
+          for (int j = 0; j < 6; j++)
           {
               fscanf(in, "%s", arr[i][j]);
           }
@@ -39,9 +39,11 @@ void  time_table()
       {
           print_date(i);
       }
+      printf("\n");
       for (int i = 0; i < 13; i++)
       {
-          printf("%d~%d ", i + 9, i + 10);
+          if(i==0)printf("%d%d~%d ", 0, 9, 10);
+          else printf("%d~%d ", i + 9, i + 10);
           for (int j = 0; j < 6; j++)
           {
               printf("%s ", arr[i][j]);
