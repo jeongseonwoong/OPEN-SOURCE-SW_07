@@ -17,7 +17,7 @@ void  time_table()
 {
     FILE *in;
     char arr[13][6][MAX];
-    if((in=fopen("time_table.txt", "r"))==NULL))//When the file doesn't exists
+    if((in=fopen("time_table.txt", "r"))==NULL)//When the file doesn't exists
     {
       printf("No time table available!");
       
@@ -68,7 +68,8 @@ void  time_table()
     
     if (rst == 2)//edit original or make new. get arguments. Make time table out of these arguments, and save then in time_table.txt
     {
-        out=fopen("time_table.txt", "w")
+        out = fopen("time_table.txt", "w");
+        fclose(out);
     }
     else //end program || use the original
     {
