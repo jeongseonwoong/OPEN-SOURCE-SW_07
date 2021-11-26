@@ -1,0 +1,107 @@
+#include "학습프로그램.h"
+
+void calender()
+{
+	FILE* fpcal;
+	FILE* fpschedule;
+	time_t timer = 0;
+	struct tm t;
+	timer = time(NULL);
+	localtime_s(&t, &timer);
+	int date[MAX], i = 0, j = 0, f = 0, dal, neon, add_day = 1, rdal[MAX], radd_day[MAX], k = 2;
+	char add[MAX], radd[MAX][MAX];
+	char select_add;
+	fopen_s(&fpcal, "calender.txt", "r");
+	fopen_s(&fpschedule, "addschedule.txt", "r");
+	neon = (t.tm_year - 100) * 100;
+	dal = t.tm_mon + neon + 1;
+	if (fpschedule != NULL)
+	{
+		while (fscanf_s(fpschedule, "%d %d", &rdal[j], &radd_day[j]) != 1)
+		{
+			fscanf_s(fpschedule, "%s", radd[j], MAX);
+			if (strcmp(radd[j], "END") == 0)
+			{
+				break;
+			}
+			j++;
+			f++;
+		}
+		for (j = 0; j < f; j++)
+		{
+			printf("%d %d %s\n", rdal[j], radd_day[j], radd[j]);
+		}
+	}
+	j = 0, i = 0;
+	while (fpcal != NULL)
+	{
+		int count_99 = 0;
+		while (fscanf_s(fpcal, "%d", &date[i]) != dal)
+		{
+			if (date[i] == dal)
+			{
+				break;
+			}
+			i++;
+		}
+		printf("%d년 %d월\n", t.tm_year + 1900, t.tm_mon + 1);
+		i++;
+		while (fscanf_s(fpcal, "%d", &date[i]) < 2100)
+		{
+			if (date[i] > 2100 || count_99 == 4)
+			{
+				break;
+			}
+			if (date[i] == 99)
+			{
+				printf("\n");
+				i++;
+				count_99++;
+				continue;
+			}
+			if (date[i] != 0)
+			{
+				for (j = 0; j < f; j++)
+				{
+					if (dal == rdal[j] && add_day == radd_day[j])
+					{
+						k = 1;
+					}
+					if (k == 1)
+					{
+						printf("%s", radd[j]);
+					}
+				}
+				if (k != 1)
+				{
+					printf("|%2d|", date[i]);
+				}
+			}
+			if (date[i] == 0)
+			{
+				printf("    ");
+			}
+			i++;
+		}
+		printf("추가하거나 수정할 일정이 있으시면 'a'를 입력하세요(없으면 아무키나 입력):");
+		scanf_s("%c",&select_add,1);
+		if (select_add == 'a')
+		{
+			fopen_s(&fpschedule, "addschedule.txt", "a");
+			if (fpschedule != NULL)
+			{
+				printf("일정을 추가할 날짜를 입력하세요:");
+				scanf_s("%d", &add_day);
+				printf("추가할 일정을 입력하세요:");
+				scanf_s("%s", add, MAX);
+				fprintf(fpschedule, "%d %d %s", dal, add_day, add);
+			}
+		}
+		fclose(fpcal);
+		break;
+	}
+	int  count_99 = 0;
+	i = 0;
+	printf("다른 날짜에 일정을 추가를 원하시면 날짜를 입력해 주세요(ex:2022-01-01):");
+
+}
