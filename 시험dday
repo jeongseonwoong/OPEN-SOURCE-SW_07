@@ -1,0 +1,130 @@
+#include"학습프로그램.h"
+int dday2()
+{
+	system("cls");
+	FILE* fp3;
+	int select,selec2,tmp=0,i=0,year1,month1,day1,pyear,pmonth,pday,year,month,day;
+	char testday[MAX],testname[MAX];
+	time_t timer = 0;
+	struct tm t;
+	timer = time(NULL);
+	localtime_s(&t, &timer);
+	printf("시험 D-Day\n");
+	printf("오늘은 %d년 %d월 %d일입니다.\n", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
+	시험();
+	scanf_s("%d", &select);
+	if (select == 1)
+	{
+		시험날짜();
+		scanf_s("%s", testday,MAX);
+		printf("시험 이름을 입력하세요:");
+		scanf_s("%s", testname, MAX);
+		tmp = 0;
+		while (testday[i] != '-')
+		{
+			tmp = tmp * 10 + (int)(testday[i] - 48);
+			i++;
+		}
+		i++;
+		year1 = tmp;
+		tmp = 0;
+		while (testday[i] != '-')
+		{
+			tmp = tmp * 10 + (int)(testday[i] - 48);
+			i++;
+		}
+		month1 = tmp;
+		tmp = 0;
+		i++;
+		while (testday[i] != '\0')
+		{
+			tmp = tmp * 10 + (int)(testday[i] - 48);
+			i++;
+		}
+		day1 = tmp;
+		pyear = t.tm_year+1900;
+		pmonth = t.tm_mon + 1;
+		pday = t.tm_mday;
+		year = year1 - pyear;
+		month = month1 - pmonth;
+		day = day1 - pday;
+		if (day < 0)
+		{
+			if ( pmonth == 5 || pmonth == 7 || pmonth == 10 || pmonth == 12)
+			{
+				month--;
+				day = 31 + day;
+			}
+			else if (pmonth == 3)
+			{
+				month--;
+				day = 28 + day;
+			}
+			else
+			{
+				month--;
+				day = 3 +day;
+			}
+		}
+		if (month < 0)
+		{
+			year--;
+			month = 12 + month;
+		}
+
+		if (year < 0)
+		{
+			printf("이미 지난 날짜입니다.");
+		}
+		else
+		{
+			printf("%d년 %d월 %d일 남았습니다.\n", year, month, day);
+			printf("저장하시려면 1, 저장 X 아무 숫자:");
+			scanf_s("%d", &selec2);
+
+			if (selec2 == 1)
+			{
+
+					fopen_s(&fp3, "savedday2.txt", "w");
+					if (fp3 != NULL)
+					{
+						fprintf(fp3, "%d %d %d %d %d %d %s\n", pyear, pmonth, pday, year, month, day, testname);
+						fclose(fp3);
+						저장되었습니다();
+					}
+			}
+		}
+		system("pause");
+	}
+	else if (select == 2)
+	{
+		int f1[MAX], f2[MAX], f3[MAX],f4[MAX],f5[MAX],f6[MAX],save=0,f=0,file=0,fsave=0;
+		char fname[MAX][MAX];
+		fopen_s(&fp3, "savedday2.txt", "r");
+		if (fp3 == NULL)
+		{
+			데이터x();
+		}
+		else
+		{
+			데이터o();
+			while (fscanf_s(fp3, "%d %d %d %d %d %d %s", &f1[fsave], &f2[fsave], &f3[fsave], &f4[fsave], &f5[fsave], &f6[fsave], fname[fsave], MAX) != EOF)
+			{
+				fsave++;
+				f++;
+			}
+			fclose(fp3);
+			for(file=0;file<fsave;file++)
+			fprintf(fp3, "%d %d %d %d %d %d %s\n", f1[file], f2[file], f3[file], f4[file], f5[file], f6[file], fname[file]);
+
+		}
+		system("pause");
+		system("cls");
+		return 0;
+	}
+	else if (select == 3)
+	{
+	return 0;
+	}
+	return 0;
+}
