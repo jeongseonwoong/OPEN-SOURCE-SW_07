@@ -1,130 +1,193 @@
 #include"학습프로그램.h"
 int dday2()
 {
-	system("cls");
-	FILE* fp3;
-	int select,selec2,tmp=0,i=0,year1,month1,day1,pyear,pmonth,pday,year,month,day;
-	char testday[MAX],testname[MAX];
-	time_t timer = 0;
-	struct tm t;
-	timer = time(NULL);
-	localtime_s(&t, &timer);
-	printf("시험 D-Day\n");
-	printf("오늘은 %d년 %d월 %d일입니다.\n", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
-	시험();
-	scanf_s("%d", &select);
-	if (select == 1)
+	int select = 1;
+	while (select != 3)
 	{
-		시험날짜();
-		scanf_s("%s", testday,MAX);
-		printf("시험 이름을 입력하세요:");
-		scanf_s("%s", testname, MAX);
-		tmp = 0;
-		while (testday[i] != '-')
+		system("cls");
+		FILE* fp3;
+		int selec2, tmp = 0, i = 0, year1, month1, day1, pyear, pmonth, pday, year, month, day;
+		char testday[MAX], testname[MAX];
+		time_t timer = 0;
+		struct tm t;
+		timer = time(NULL);
+		localtime_s(&t, &timer);
+		printf("시험 D-Day\n");
+		printf("오늘은 %d년 %d월 %d일입니다.\n", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
+		시험();
+		scanf_s("%d", &select);
+		while (select == 1)
 		{
-			tmp = tmp * 10 + (int)(testday[i] - 48);
-			i++;
-		}
-		i++;
-		year1 = tmp;
-		tmp = 0;
-		while (testday[i] != '-')
-		{
-			tmp = tmp * 10 + (int)(testday[i] - 48);
-			i++;
-		}
-		month1 = tmp;
-		tmp = 0;
-		i++;
-		while (testday[i] != '\0')
-		{
-			tmp = tmp * 10 + (int)(testday[i] - 48);
-			i++;
-		}
-		day1 = tmp;
-		pyear = t.tm_year+1900;
-		pmonth = t.tm_mon + 1;
-		pday = t.tm_mday;
-		year = year1 - pyear;
-		month = month1 - pmonth;
-		day = day1 - pday;
-		if (day < 0)
-		{
-			if ( pmonth == 5 || pmonth == 7 || pmonth == 10 || pmonth == 12)
+			시험날짜();
+			scanf_s("%s", testday, MAX);
+			system("cls");
+			tmp = 0;
+			while (testday[i] != '-')
 			{
-				month--;
-				day = 31 + day;
+				tmp = tmp * 10 + (int)(testday[i] - 48);
+				i++;
 			}
-			else if (pmonth == 3)
+			i++;
+			year1 = tmp;
+			tmp = 0;
+			while (testday[i] != '-')
 			{
-				month--;
-				day = 28 + day;
+				tmp = tmp * 10 + (int)(testday[i] - 48);
+				i++;
+			}
+			month1 = tmp;
+			tmp = 0;
+			i++;
+			while (testday[i] != '\0')
+			{
+				tmp = tmp * 10 + (int)(testday[i] - 48);
+				i++;
+			}
+			day1 = tmp;
+			while (year1 > 2100 || month1 == NULL || day1 == NULL)
+			{
+				이상한날짜();
+				scanf_s("%s", testday, MAX);
+				continue;
+			}
+			while (testday[0] > '2' || testday[1] > '0' || testday[2] > '2' || testday[3] > '6' || testday[5] > '1' || testday[8] > '3' || testday[4] != '-' || testday[7] != '-')
+			{
+				이상한날짜();
+				scanf_s("%s", testday, MAX);
+				continue;
+			}
+			while (month1 > 12)
+			{
+				이상한날짜();
+				scanf_s("%s", testday, MAX);
+				continue;
+			}
+			while (month1 == 1 || month1 == 3 || month1 == 5 || month1 == 7 || month1 == 8 || month1 == 10 || month1 == 12)
+			{
+				if (day1 > 31)
+				{
+					이상한날짜();
+					scanf_s("%s", testday, MAX);
+					continue;
+				}
+				break;
+			}
+			while (month1 == 4 || month1 == 6 || month1 == 9 || month1 == 11)
+			{
+				if (day1 > 30)
+				{
+					이상한날짜();
+					scanf_s("%s", testday, MAX);
+					continue;
+				}
+				break;
+			}
+			while (month1 == 2)
+			{
+				if (day1 > 28)
+				{
+					이상한날짜();
+					scanf_s("%s", testday, MAX);
+					continue;
+				}
+				break;
+			}
+			pyear = t.tm_year + 1900;
+			pmonth = t.tm_mon + 1;
+			pday = t.tm_mday;
+			year = year1 - pyear;
+			month = month1 - pmonth;
+			day = day1 - pday;
+			시험이름();
+			scanf_s("%s", testname, MAX);
+			system("cls");
+			if (day < 0)
+			{
+				if (pmonth == 5 || pmonth == 7 || pmonth == 10 || pmonth == 12)
+				{
+					month--;
+					day = 31 + day;
+				}
+				else if (pmonth == 3)
+				{
+					month--;
+					day = 28 + day;
+				}
+				else
+				{
+					month--;
+					day = 3 + day;
+				}
+			}
+			if (month < 0)
+			{
+				year--;
+				month = 12 + month;
+			}
+
+			if (year < 0)
+			{
+				이미지나간시험날짜();
 			}
 			else
 			{
-				month--;
-				day = 3 +day;
-			}
-		}
-		if (month < 0)
-		{
-			year--;
-			month = 12 + month;
-		}
+				얼마나남았습니다(year,month,day);
+				데이터저장여부();
+				scanf_s("%d", &selec2);
 
-		if (year < 0)
-		{
-			printf("이미 지난 날짜입니다.");
-		}
-		else
-		{
-			printf("%d년 %d월 %d일 남았습니다.\n", year, month, day);
-			printf("저장하시려면 1, 저장 X 아무 숫자:");
-			scanf_s("%d", &selec2);
+				if (selec2 == 1)
+				{
 
-			if (selec2 == 1)
-			{
-
-					fopen_s(&fp3, "savedday2.txt", "w");
+					fopen_s(&fp3, "savedday2.txt", "a");
 					if (fp3 != NULL)
 					{
 						fprintf(fp3, "%d %d %d %d %d %d %s\n", pyear, pmonth, pday, year, month, day, testname);
 						fclose(fp3);
 						저장되었습니다();
+						Sleep(300);
+						system("cls");
 					}
+				}
 			}
+			system("pause");
+			break;
 		}
-		system("pause");
-	}
-	else if (select == 2)
-	{
-		int f1[MAX], f2[MAX], f3[MAX],f4[MAX],f5[MAX],f6[MAX],save=0,f=0,file=0,fsave=0;
-		char fname[MAX][MAX];
-		fopen_s(&fp3, "savedday2.txt", "r");
-		if (fp3 == NULL)
+		if (select == 2)
 		{
-			데이터x();
-		}
-		else
-		{
-			데이터o();
-			while (fscanf_s(fp3, "%d %d %d %d %d %d %s", &f1[fsave], &f2[fsave], &f3[fsave], &f4[fsave], &f5[fsave], &f6[fsave], fname[fsave], MAX) != EOF)
+			int f1[MAX], f2[MAX], f3[MAX], f4[MAX], f5[MAX], f6[MAX], save = 0, f = 0, file = 0, fsave = 0;
+			char fname[MAX][MAX];
+			fopen_s(&fp3, "savedday2.txt", "r");
+			if (fp3 == NULL)
 			{
-				fsave++;
-				f++;
+				데이터x();
 			}
-			fclose(fp3);
-			for(file=0;file<fsave;file++)
-			fprintf(fp3, "%d %d %d %d %d %d %s\n", f1[file], f2[file], f3[file], f4[file], f5[file], f6[file], fname[file]);
+			else
+			{
+				데이터o();
+				while (fscanf_s(fp3, "%d %d %d %d %d %d %s", &f1[fsave], &f2[fsave], &f3[fsave], &f4[fsave], &f5[fsave], &f6[fsave], fname[fsave], MAX) != EOF)
+				{
+					fsave++;
+					f++;
+				}
+				fclose(fp3);
+				printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
 
+				for (file = 0; file < fsave; file++)
+				{
+					printf("[%d]:%d년 %d월 %d일부터  %s시험까지 %d년 %d월 %d일 남았었습니다.\n",file, f1[file], f2[file], f3[file], fname[file], f4[file], f5[file], f6[file]);
+				}
+				printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+
+
+			}
+			system("pause");
+			system("cls");
 		}
-		system("pause");
-		system("cls");
-		return 0;
+		else if (select == 3)
+		{
+			return 0;
+		}
+
 	}
-	else if (select == 3)
-	{
-	return 0;
-	}
-	return 0;
+
 }

@@ -11,7 +11,7 @@ int dday()
 		FILE* fpdday;
 		int i = 0, j = 0, f = 0, file=0;
 		char suneong[MAX], date[MAX];
-		int year, month, day, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, save, fsave = 0, fdelete = 100, interchoose, fs;// 2021-11-06
+		int year, month, day, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, fsave = 0, fdelete = 100, interchoose;// 2021-11-06
 		int f1[MAX], f2[MAX], f3[MAX], f4[MAX], f5[MAX], f6[MAX], f7[MAX], s1, s2, s3, s4, s5, s6, s7;
 		const char s2022[MAX] = "2021-11-18";
 		const char s2023[MAX] = "2022-11-17";
@@ -53,16 +53,7 @@ int dday()
 				{
 					printf("삭제하고 싶은 데이터가 있으시면 해당 데이터의 넘버를 눌러주세요(없으면 0):");
 					scanf_s("%d", &fdelete);
-					if(isdigit(fdelete))
-					{
-						;
-					}
-					else
-					{
-						system("cls");
-						printf("문자 입력 오류..\n");
-						continue;
-					}
+
 				}
 				if (fdelete != 0 && fpdday != NULL)
 				{
@@ -235,21 +226,9 @@ int dday()
 				s5 = year;
 				s6 = month;
 				s7 = day;
-				얼마나남았습니다();
-				printf("■    %d년 %d월 %d일 남았습니다.   ■\n", year, month, day);
-				printf("■■■■■■■■■■■■■■■■■■\n");
+				얼마나남았습니다(year,month,day);
 				데이터저장여부();
 				scanf_s("%d", &fsave);
-				if (isdigit(fsave))
-				{
-					;
-				}
-				else
-				{
-					system("cls");
-					printf("문자 입력 오류..\n");
-					continue;
-				}
 				fopen_s(&fpdday, "savedday.txt", "a");
 				if (fsave == 1)
 				{
@@ -416,24 +395,12 @@ int dday()
 			}
 			else
 			{
-				얼마나남았습니다();
-				printf("■    %d년 %d월 %d일 남았습니다.   ■\n", year, month, day);
-				printf("■■■■■■■■■■■■■■■■■■\n");
+				얼마나남았습니다(year,month,day);
 				s5 = year;
 				s6 = month;
 				s7 = day;
 				데이터저장여부();
 				scanf_s("%d", &fsave);
-				if (isdigit(fsave))
-				{
-					;
-				}
-				else
-				{
-					system("cls");
-					printf("문자 입력 오류..\n");
-					continue;
-				}
 				fopen_s(&fpdday, "savedday.txt", "a");
 				if (fsave == 1)
 				{
