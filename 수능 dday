@@ -445,11 +445,12 @@ int dday()
 			system("cls");
 			continue;
 		}
-		if (interchoose > 3)
+		if (interchoose == 4)
 		{
-			printf("다시 입력해주세요:");
 			system("cls");
-			dday();
+			printf("메인 화면으로 가는 중...");
+			Sleep(500);
+			break;
 		}
 	}
 

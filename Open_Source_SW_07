@@ -1,7 +1,7 @@
 #include "학습프로그램.h"
 int main()
 {
-	int select=0;
+	int select = 0;
 	while (select != 9)
 	{
 		system("cls");
@@ -21,7 +21,7 @@ int main()
 		}
 		else if (select == 3)
 		{
-
+			dday2();
 		}
 	}
 
