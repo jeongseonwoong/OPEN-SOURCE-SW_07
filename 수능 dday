@@ -1,0 +1,457 @@
+#include "학습프로그램.h"
+int dday()
+{
+	int recursive = 1;
+	while (recursive)
+	{
+		system("cls");
+		suneong_1();
+		Sleep(500);
+		system("cls");
+		FILE* fpdday;
+		int i = 0, j = 0, f = 0, file=0;
+		char suneong[MAX], date[MAX];
+		int year, month, day, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, save, fsave = 0, fdelete = 100, interchoose, fs;// 2021-11-06
+		int f1[MAX], f2[MAX], f3[MAX], f4[MAX], f5[MAX], f6[MAX], f7[MAX], s1, s2, s3, s4, s5, s6, s7;
+		const char s2022[MAX] = "2021-11-18";
+		const char s2023[MAX] = "2022-11-17";
+		const char s2024[MAX] = "2023-11-16";
+		const char s2025[MAX] = "2024-11-14";
+		time_t timer = 0;
+		struct tm t;
+		timer = time(NULL);
+		localtime_s(&t, &timer);
+		printf("수능 D-Day\n");
+		printf("오늘은 %d년 %d월 %d일입니다.\n", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
+		suneong_2();
+		scanf_s("%d", &interchoose);
+		system("cls");
+		if (interchoose == 1)
+		{
+			fopen_s(&fpdday, "savedday.txt", "r");
+			if (fpdday == NULL)
+			{
+				데이터x();
+			}
+			else
+			{
+				데이터o();
+				printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+				while (fpdday != NULL && fscanf_s(fpdday, "%d %d %d %d %d %d %d", &f1[fsave], &f2[fsave], &f3[fsave], &f4[fsave], &f5[fsave], &f6[fsave], &f7[fsave]) != EOF)
+				{
+					fsave++;
+				}
+				for (f = 0; f < fsave; f++)
+				{
+					file = f + 1;
+					printf("#%d: %d년 %d월 %d일 부터 %d년 수능까지 %d년 %d월 %d일 남았었습니다.\n", file, f1[f], f2[f], f3[f], f4[f], f5[f], f6[f], f7[f]);
+					printf("---------------------------------------------------------------------\n\n");
+				}
+				printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+				fclose(fpdday);
+				if (fpdday != NULL)
+				{
+					printf("삭제하고 싶은 데이터가 있으시면 해당 데이터의 넘버를 눌러주세요(없으면 0):");
+					scanf_s("%d", &fdelete);
+					if(isdigit(fdelete))
+					{
+						;
+					}
+					else
+					{
+						system("cls");
+						printf("문자 입력 오류..\n");
+						continue;
+					}
+				}
+				if (fdelete != 0 && fpdday != NULL)
+				{
+					fdelete--;
+					fopen_s(&fpdday, "savedday.txt", "w");
+					for (f = 0; f < fdelete; f++)
+					{
+						fprintf(fpdday, "%d %d %d %d %d %d %d \n", f1[f], f2[f], f3[f], f4[f], f5[f], f6[f], f7[f]);
+					}
+					for (f = fdelete + 1; f < fsave; f++)
+					{
+						fprintf(fpdday, "%d %d %d %d %d %d %d \n", f1[f], f2[f], f3[f], f4[f], f5[f], f6[f], f7[f]);
+					}
+					fclose(fpdday);
+				}
+			}
+			system("pause");
+			system("cls");
+			continue;
+		}
+		if (interchoose == 2)
+		{
+			몇학년도수능();
+			scanf_s("%s", suneong, 9);
+			system("cls");
+			if (strcmp(suneong, "2025") > 0)
+			{
+				printf("수능 예정일이 정해지지 않았습니다.\n\n");
+				return 0;
+			}
+			if (strcmp(suneong, "2022") < 0)
+			{
+				이미지나간수능날짜();
+				return 0;
+			}
+			if (strcmp(suneong, "2022") == 0)
+			{
+				while (s2022[j] != '-')
+				{
+					tmp = tmp * 10 + (int)(s2022[j] - 48);
+					j++;
+				}
+			}
+			if (strcmp(suneong, "2023") == 0)
+			{
+				while (s2023[j] != '-')
+				{
+					tmp = tmp * 10 + (int)(s2023[j] - 48);
+					j++;
+				}
+			}
+			if (strcmp(suneong, "2024") == 0)
+			{
+				while (s2022[j] != '-')
+				{
+					tmp = tmp * 10 + (int)(s2024[j] - 48);
+					j++;
+				}
+			}
+			if (strcmp(suneong, "2025") == 0)
+			{
+				while (s2022[j] != '-')
+				{
+					tmp = tmp * 10 + (int)(s2025[j] - 48);
+					j++;
+				}
+			}
+			year = tmp - (t.tm_year + 1900);
+			month = 11 - (t.tm_mon + 1);
+			tmp = 0;
+			int mmon = (t.tm_mon + 1);
+			if (strcmp(suneong, "2022") == 0)
+			{
+				j = 8;
+				while (s2022[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2022[j] - 48);
+					j++;
+				}
+				if (tmp < t.tm_mday)
+				{
+					month--;
+					day = 31 - t.tm_mday;
+					day = day + tmp;
+				}
+				else
+				{
+					day = tmp - t.tm_mday;
+				}
+			}
+			else if (strcmp(suneong, "2023") == 0)
+			{
+				j = 8;
+				while (s2023[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2023[j] - 48);
+					j++;
+				}
+				if (tmp < t.tm_mday)
+				{
+					month--;
+					day = 31 - t.tm_mday;
+					day = day + tmp;
+				}
+				else
+				{
+					day = tmp - t.tm_mday;
+				}
+			}
+			else if (strcmp(suneong, "2024") == 0)
+			{
+				j = 8;
+				while (s2024[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2024[j] - 48);
+					j++;
+				}
+				if (tmp < t.tm_mday)
+				{
+					month--;
+					day = 31 - t.tm_mday;
+					day = day + tmp;
+				}
+				else
+				{
+					day = tmp - t.tm_mday;
+				}
+			}
+			else if (strcmp(suneong, "2025") == 0)
+			{
+				j = 8;
+				while (s2025[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2025[j] - 48);
+					j++;
+				}
+				if (tmp < t.tm_mday)
+				{
+					month--;
+					day = 31 - t.tm_mday;
+					day = day + tmp;
+				}
+				else
+				{
+					day = tmp - t.tm_mday;
+				}
+			}
+			if (month < 0)
+			{
+				year--;
+				month = 12 + month;
+			}
+			if (year < 0)
+			{
+				이미지나간수능날짜();
+			}
+			else
+			{
+				tmp = 0;
+				i = 0;
+				while (suneong[i] != '\0')
+				{
+					tmp = tmp * 10 + (int)(suneong[i] - 48);
+					i++;
+				}
+				s1 = t.tm_year + 1900;
+				s2 = t.tm_mon + 1;
+				s3 = t.tm_mday;
+				s4 = tmp;
+				s5 = year;
+				s6 = month;
+				s7 = day;
+				얼마나남았습니다();
+				printf("■    %d년 %d월 %d일 남았습니다.   ■\n", year, month, day);
+				printf("■■■■■■■■■■■■■■■■■■\n");
+				데이터저장여부();
+				scanf_s("%d", &fsave);
+				if (isdigit(fsave))
+				{
+					;
+				}
+				else
+				{
+					system("cls");
+					printf("문자 입력 오류..\n");
+					continue;
+				}
+				fopen_s(&fpdday, "savedday.txt", "a");
+				if (fsave == 1)
+				{
+					fprintf(fpdday, "%d %d %d %d %d %d %d \n", s1, s2, s3, s4, s5, s6, s7);
+				}
+				fclose(fpdday);
+			}
+			system("pause");
+			continue;
+		}
+		if (interchoose == 3)
+		{
+			임의의날짜입력();
+			scanf_s("%s", date, MAX);
+			while (date)
+			{
+				tmp = 0;
+				for (i = 0; i < 4; i++)
+				{
+					tmp = tmp * 10 + (int)(date[i] - 48);
+				}
+				year = tmp;
+				tmp = 0;
+				for (i = 5; i < 7; i++)
+				{
+					tmp = tmp * 10 + (int)(date[i] - 48);
+				}
+				month = tmp;
+				tmp = 0;
+				for (i = 8; i < 10; i++)
+				{
+					tmp = tmp * 10 + (int)(date[i] - 48);
+				}
+				day = tmp;
+				if (date[0] > '2' || date[1] > '0' || date[2] > '2' || date[3] > '6' || date[5] > '1' || date[8] > '3' || date[4] != '-' || date[7] != '-')
+				{
+					이상한날짜();
+					scanf_s("%s", date, MAX);
+					continue;
+				}
+				else if (month > 12)
+				{
+					이상한날짜();
+					scanf_s("%s", date, MAX);
+					continue;
+				}
+				else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+				{
+					if (day > 31)
+					{
+						이상한날짜();
+						scanf_s("%s", date, MAX);
+						continue;
+					}
+				}
+				else if (month == 4 || month == 6 || month == 9 || month == 11)
+				{
+					if (day > 30)
+					{
+						이상한날짜();
+						scanf_s("%s", date, MAX);
+						continue;
+					}
+				}
+				else if (month == 2)
+				{
+					if (day > 28)
+					{
+						이상한날짜();
+						scanf_s("%s", date, MAX);
+						continue;
+					}
+				}
+				break;
+			}
+			s1 = year;
+			s2 = month;
+			s3 = day;
+			몇학년도수능();
+			scanf_s("%s", suneong, MAX);
+			system("cls");
+			if (strcmp(suneong, "2025") > 0)
+			{
+				printf("수능 예정일이 아직 정해지지 않았습니다.");
+				return 0;
+			}
+			if (strcmp(suneong, "2022") < 0)
+			{
+				이미지나간수능날짜();
+				return 0;
+			}
+			tmp = 0;
+			i = 0;
+			while (suneong[i] != '\0')
+			{
+				tmp = tmp * 10 + (int)(suneong[i] - 48);
+				i++;
+			}
+			s4 = tmp;
+			i = 0;
+			j = 0;
+			tmp = 0;
+			while (s2022[j] != '-')
+			{
+				tmp = tmp * 10 + (int)(s2022[j] - 48);
+				j++;
+			}
+			year = tmp - s1;
+			month = 11 - s2;
+			tmp = 0;
+			j = 8;
+			if (strcmp(suneong, "2022") == 0)
+			{
+				while (s2022[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2022[j] - 48);
+					j++;
+				}
+				day = tmp - s3;
+			}
+			else if (strcmp(suneong, "2023") == 0)
+			{
+				year++;
+				while (s2023[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2023[j] - 48);
+					j++;
+				}
+				day = tmp - s3;
+			}
+			else if (strcmp(suneong, "2024") == 0)
+			{
+				year = year + 2;
+				while (s2024[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2024[j] - 48);
+					j++;
+				}
+				day = tmp - s3;
+			}
+			else if (strcmp(suneong, "2025") == 0)
+			{
+				year = year + 3;
+				while (s2025[j] != '\0')
+				{
+					tmp = tmp * 10 + (int)(s2025[j] - 48);
+					j++;
+				}
+				day = tmp - s3;
+			}
+			if (day < 0)
+			{
+				month--;
+				day = 31 + day;
+			}
+			if (month < 0)
+			{
+				year--;
+				month = 12 + month;
+			}
+			if (year < 0)
+			{
+				이미지나간수능날짜();
+			}
+			else
+			{
+				얼마나남았습니다();
+				printf("■    %d년 %d월 %d일 남았습니다.   ■\n", year, month, day);
+				printf("■■■■■■■■■■■■■■■■■■\n");
+				s5 = year;
+				s6 = month;
+				s7 = day;
+				데이터저장여부();
+				scanf_s("%d", &fsave);
+				if (isdigit(fsave))
+				{
+					;
+				}
+				else
+				{
+					system("cls");
+					printf("문자 입력 오류..\n");
+					continue;
+				}
+				fopen_s(&fpdday, "savedday.txt", "a");
+				if (fsave == 1)
+				{
+					fprintf(fpdday, "%d %d %d %d %d %d %d \n", s1, s2, s3, s4, s5, s6, s7);
+				}
+				fclose(fpdday);
+			}
+			system("pause");
+			system("cls");
+			continue;
+		}
+		if (interchoose > 3)
+		{
+			printf("다시 입력해주세요:");
+			system("cls");
+			dday();
+		}
+	}
+
+	return 0;
+}
