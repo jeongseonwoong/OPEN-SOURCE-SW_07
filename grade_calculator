@@ -174,14 +174,14 @@ void put_data(a, b) {
 			}
 		}
 		printf("과목명을 입력하여 주십시오 : ");
-		fflush(stdin);
-		scanf("%s", &name[i]);
+		rewind(stdin);
+		scanf("%[^\n]", &name[i]);
 		if (name[i][0] == '1') break;
 		printf("평점을 입력하여 주십시오\n");
 		printf("Ex)A+\n");
 		printf(">> ");
-		fflush(stdin);
-		scanf(" %s", grade1);
+		rewind(stdin);
+		scanf("%s", grade1);
 		if (strcmp(grade1, "A+") == 0) {
 
 			grade[i] = 1;
