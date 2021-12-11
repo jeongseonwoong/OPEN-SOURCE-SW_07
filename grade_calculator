@@ -185,7 +185,8 @@ void put_data(a, b) {
 		printf("평점을 입력하여 주십시오\n");
 		printf("Ex)A+\n");
 		printf(">> ");
-		scanf("%s", grade1);
+		fflush(stdin);
+		scanf(" %s", grade1);
 		if (strcmp(grade1, "A+") == 0) {
 
 			grade[i] = 1;
@@ -434,5 +435,129 @@ int timesum(int times, int sum2) {
 void grade_manage() {
 
 	system("cls");
+	char line[1000];
+	FILE* fp = NULL;
+	fp = fopen("test.txt", "r");
+	fclose(fp);
 
+	if (fopen("1-1.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■1학년 1학기■■■■■■■■■■\n");
+		fp = fopen("1-1.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("1-2.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■1학년 2학기■■■■■■■■■■\n");
+		fp = fopen("1-2.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("2-1.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■2학년 1학기■■■■■■■■■■\n");
+		fp = fopen("2-1.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("2-2.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■2학년 2학기■■■■■■■■■■\n");
+		fp = fopen("2-2.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("3-1.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■3학년 1학기■■■■■■■■■■\n");
+		fp = fopen("3-1.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("3-2.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■3학년 2학기■■■■■■■■■■\n");
+		fp = fopen("3-2.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("4-1.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■4학년 1학기■■■■■■■■■■\n");
+		fp = fopen("4-1.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("4-2.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■4학년 2학기■■■■■■■■■■\n");
+		fp = fopen("4-2.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("5-1.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■5학년 1학기■■■■■■■■■■\n");
+		fp = fopen("5-1.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("5-2.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■5학년 2학기■■■■■■■■■■\n");
+		fp = fopen("5-2.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("6-1.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■6학년 1학기■■■■■■■■■■\n");
+		fp = fopen("6-1.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
+	if (fopen("6-2.txt", "r") != NULL) {
+		printf("\n■■■■■■■■■■6학년 2학기■■■■■■■■■■\n");
+		fp = fopen("6-2.txt", "r");
+		printf("\n");
+		while (fgets(line, 1000, fp) != NULL) {
+			printf("%s", line);
+		}
+		printf("\n");
+		fclose(fp);
+	}
 }
