@@ -1,5 +1,5 @@
 #include "학습프로그램.h"
-
+FILE* fpaddsche;
 int startday(int year)
 {
 
@@ -8,14 +8,115 @@ int startday(int year)
     return startday;
 }
 
+int adddate(char date[MAX])
+{
+    int i = 0,tmp,year,month,day;
+    char savef[MAX];
+    달력저장날짜();
+    scanf_s("%s", date, MAX);
+    if (strcmp(date, "exit") == 0)
+    {
+        return 1;
+    }
+    while (date)
+    {
+        if (strcmp(date, "exit") == 0)
+        {
+            return 1;
+        }
+        tmp = 0,i=0;
+        for (i = 0; i < 4; i++)
+        {
+            tmp = tmp * 10 + (int)(date[i] - 48);
+        }
+        year = tmp;
+        tmp = 0;
+        for (i = 5; i < 7; i++)
+        {
+            tmp = tmp * 10 + (int)(date[i] - 48);
+        }
+        month = tmp;
+        tmp = 0;
+        for (i = 8; i < 10; i++)
+        {
+            tmp = tmp * 10 + (int)(date[i] - 48);
+        }
+        day = tmp;
+        tmp = 0;
+        if (date[0] > '2' || date[1] > '0' || date[2] > '2' || date[3] > '6' || date[5] > '1' || date[8] > '3' || date[4] != '-' || date[7] != '-')
+        {
+            이상한날짜();
+            scanf_s("%s", date, MAX);
+            continue;
+        }
+        else if (month > 12)
+        {
+            이상한날짜();
+            scanf_s("%s", date, MAX);
+            continue;
+        }
+        else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+        {
+            if (day > 31)
+            {
+                이상한날짜();
+                scanf_s("%s", date, MAX);
+                continue;
+            }
+        }
+        else if (month == 4 || month == 6 || month == 9 || month == 11)
+        {
+            if (day > 30)
+            {
+                이상한날짜();
+                scanf_s("%s", date, MAX);
+                continue;
+            }
+        }
+        else if (month == 2)
+        {
+            if (day > 28)
+            {
+                이상한날짜();
+                scanf_s("%s", date, MAX);
+                continue;
+            }
+        }
+        system("cls");
+        저장할내용();
+        scanf_s("%s", savef, MAX);
+        system("cls");
+        fopen_s(&fpaddsche, "addschedule.txt", "a");
+        if (fpaddsche != NULL)
+        {
+            if (strcmp(savef,"exit")== 0)
+            {
+                printf("기존 화면으로 이동중..");
+                Sleep(700);
+                system("cls");
+                return 1;
+            }
+            else
+            {
+                fprintf(fpaddsche, "%d %d %d %s\n", year, month, day, savef);
+                fclose(fpaddsche);
+                저장되었습니다();
+                Sleep(1500);
+            }
+        }
+        break;
+    }
+
+    return 1;
+}
+
 void calender()
 {
-    FILE* fpaddsche;
     while (1)
     {
         system("cls");
-        int selectopt, selectopt2, selectopt3, year, curmon, month, day, goweekend = 0, start, i = 0, j = 0, data[MAX] = { 0 }, tmp, k = 2, fry[MAX], frm[MAX], frd[MAX], times = 0, print = 0;
-        char date[MAX], savef[MAX], frs[MAX][MAX];
+        int selectopt, selectopt2, selectopt3, year, curmon, month, day, goweekend = 0, start, i = 0, j = 0, data[MAX] = { 0 }, k = 2, fry[MAX], frm[MAX], frd[MAX], times = 0, print = 0,tmp;
+        char date[MAX], frs[MAX][MAX];
         time_t timer = 0;
         struct tm t;
         timer = time(NULL);
@@ -23,10 +124,24 @@ void calender()
         달력선택창();
         scanf_s("%d", &selectopt);
         system("cls");
+        fopen_s(&fpaddsche, "addschedule.txt", "r");
+        if (fpaddsche != NULL)
+        {
+            i = 0;
+            while (fscanf_s(fpaddsche, "%d %d %d %s", &fry[i], &frm[i], &frd[i], frs[i], MAX) != EOF)
+            {
+                i++;
+                times++;
+            }
+        }
+        if (fpaddsche != NULL)
+        {
+            fclose(fpaddsche);
+        }
         while (selectopt == 1)
         {
             k = 1;
-            달력년도(t.tm_year + 1900);
+            달력년도(t.tm_year + 1900,t.tm_mon+1);
             scanf_s("%d", &selectopt2);
             system("cls");
             if (selectopt2 == 1)
@@ -39,9 +154,21 @@ void calender()
                 달력년도2();
                 scanf_s("%d", &year);
                 system("cls");
+                if(year<200||year>2030)
+                {
+                    이상한날짜();
+                    Sleep(400);
+                    break;
+                }
                 달력달2();
                 scanf_s("%d", &curmon);
                 system("cls");
+                if (curmon < 0 || curmon>12)
+                {
+                    이상한날짜();
+                    Sleep(400);
+                    break;
+                }
             }
             else
             {
@@ -56,26 +183,14 @@ void calender()
                 monthday[1] = 29;
             }
             start = startday(year);
+            i = 0;
             for (month = 1; month < curmon; month++)
             {
                 start = (start + monthday[i]) % 7;
                 i++;
             }
-            fopen_s(&fpaddsche, "addschedule.txt", "r");
-            if (fpaddsche != NULL)
-            {
-                i = 0;
-                while (fscanf_s(fpaddsche, "%d %d %d %s", &fry[i], &frm[i], &frd[i], frs[i], MAX) != EOF)
-                {
-                    i++;
-                    times++;
-                }
-            }
-            if (fpaddsche != NULL)
-            {
-                fclose(fpaddsche);
-            }
-            printf("\n\n---------------------------------%s-------------------------------------\n", months[curmon - 1]);
+            printf("%d\n", year);
+            printf("---------------------------------%s-------------------------------------\n", months[curmon - 1]);
             printf("\n일          월          화          수           목          금          토\n\n");
 
             for (goweekend = 0; goweekend < start; goweekend++)
@@ -110,7 +225,6 @@ void calender()
             }
             printf("\n\n");
             printf("저장된 데이터가 있으면 ■, 저장된 데이터가 없으면 □\n");
-            system("pause");
             달력보고선택();
             scanf_s("%d", &selectopt3);
             system("cls");
@@ -118,140 +232,98 @@ void calender()
             {
                 system("cls");
                 selectopt = 2;
-                break;
-
             }
             else if (selectopt3 == 2)
             {
-                selectopt = 1;
-            }
-            else
-            {
-                break;
+                selectopt = 3;
             }
         }
+
         while (selectopt == 2)
         {
-
-            if (k == 2)
-            {
-                달력저장확인();
-                scanf_s("%s", date, MAX);
-                while (strcmp(date,"exit")!=0)
-                {
-                    tmp = 0;
-                    for (i = 0; i < 4; i++)
-                    {
-                        tmp = tmp * 10 + (int)(date[i] - 48);
-                    }
-                    year = tmp;
-                    tmp = 0;
-                    for (i = 5; i < 7; i++)
-                    {
-                        tmp = tmp * 10 + (int)(date[i] - 48);
-                    }
-                    month = tmp;
-                    tmp = 0;
-                    for (i = 8; i < 10; i++)
-                    {
-                        tmp = tmp * 10 + (int)(date[i] - 48);
-                    }
-                    day = tmp;
-                    system("cls");
-                    if (date[4] != '-' || date[7] != '-' || month > 12 || month < 1 || day>31)
-                    {
-                        system("cls");
-                        continue;
-                    }
-                    if (date[0] > '2' || date[1] > '0' || date[2] > '2' || date[3] > '6' || date[5] > '1' || date[8] > '3' || date[4] != '-' || date[7] != '-')
-                    {
-                        system("cls");
-                        continue;
-                    }
-                    else if (month > 12)
-                    {
-                        system("cls");
-                        continue;
-                    }
-                    else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-                    {
-                        if (day > 31)
-                        {
-                            system("cls");
-                            continue;
-                        }
-                    }
-                    else if (month == 4 || month == 6 || month == 9 || month == 11)
-                    {
-                        if (day > 30)
-                        {
-                            system("cls");
-                            continue;
-                        }
-                    }
-                    else if (month == 2)
-                    {
-                        if (day > 28)
-                        {
-                            system("cls");
-                            continue;
-                        }
-                    }
-                    break;
-                }
-                if(strcmp(date,"exit")==0)
-                {
-                    break;
-                }
-
-            }
-            else if (k == 1)
-            {
-                달력저장확인2();
-                scanf_s("%d", &day);
-                while (day!=0)
-                {
-                    if (day == 0)
-                    {
-                        break;
-                    }
-                    if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
-                    {
-                        if (day > 31)
-                        {
-                            system("cls");
-                            continue;
-                        }
-                    }
-                    else if (month == 4 || month == 6 || month == 9 || month == 11)
-                    {
-                        if (day > 30)
-                        {
-                            system("cls");
-                            continue;
-                        }
-                    }
-                    else if (month == 2)
-                    {
-                        if (day > 28)
-                        {
-                            system("cls");
-                            continue;
-                        }
-                    }
-                    break;
-                }
-                if (day == 0)
-                {
-                    break;
-                }
-                system("cls");
-            }
-            if (date == 0 || day == 0)
+           int result;
+           result= adddate(date);
+           if (result == 1)
+           {
+               break;
+           }
+        }
+        if (selectopt == 3)
+        {
+            system("cls");
+            달력확인날짜();
+            scanf_s("%s", date, MAX);
+            if (strcmp(date, "exit") == 0)
             {
                 break;
             }
-            printf("%d년 %d월 %d일", year, month, day);
+            while (date)
+            {
+                tmp = 0, i = 0;
+                for (i = 0; i < 4; i++)
+                {
+                    tmp = tmp * 10 + (int)(date[i] - 48);
+                }
+                year = tmp;
+                tmp = 0;
+                for (i = 5; i < 7; i++)
+                {
+                    tmp = tmp * 10 + (int)(date[i] - 48);
+                }
+                month = tmp;
+                tmp = 0;
+                for (i = 8; i < 10; i++)
+                {
+                    tmp = tmp * 10 + (int)(date[i] - 48);
+                }
+                day = tmp;
+                tmp = 0;
+                if (date[0] > '2' || date[1] > '0' || date[2] > '2' || date[3] > '6' || date[5] > '1' || date[8] > '3' || date[4] != '-' || date[7] != '-')
+                {
+                    이상한날짜();
+                    scanf_s("%s", date, MAX);
+                    continue;
+                }
+                else if (month > 12)
+                {
+                    이상한날짜();
+                    scanf_s("%s", date, MAX);
+                    continue;
+                }
+                else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+                {
+                    if (day > 31)
+                    {
+                        이상한날짜();
+                        scanf_s("%s", date, MAX);
+                        continue;
+                    }
+                }
+                else if (month == 4 || month == 6 || month == 9 || month == 11)
+                {
+                    if (day > 30)
+                    {
+                        이상한날짜();
+                        scanf_s("%s", date, MAX);
+                        continue;
+                    }
+                }
+                else if (month == 2)
+                {
+                    if (day > 28)
+                    {
+                        이상한날짜();
+                        scanf_s("%s", date, MAX);
+                        continue;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+                break;
+            }
+            system("cls");
             for (i = 0; i < times; i++)
             {
                 if (year == fry[i] && month == frm[i] && day == frd[i])
@@ -260,30 +332,11 @@ void calender()
                     저장된내용(frs[i], j);
                 }
             }
-            저장할내용();
-            scanf_s("%s", savef, MAX);
+            printf("\n");
+            system("pause");
             system("cls");
-            fopen_s(&fpaddsche, "addschedule.txt", "a");
-            if (fpaddsche != NULL)
-            {
-                if (strcmp(savef ,"exit")==0)
-                {
-                    printf("기존 화면으로 이동중..");
-                    Sleep(700);
-                    system("cls");
-                    break;
-                }
-                else
-                {
-                    fprintf(fpaddsche, "%d %d %d %s\n", year, month, day, savef);
-                    fclose(fpaddsche);
-                    저장되었습니다();
-                }
-            }
-            Sleep(700);
-            break;
         }
-        if (selectopt == 3)
+        else if(selectopt==4)
         {
             break;
         }
