@@ -4,9 +4,45 @@
 #define MAX 100
 int size=0;
 
-struct Node{
-  char subject[MAX];
-}index[MAX];
+
+void print_subject(char arr[], int max)
+{
+    int size = strlen(arr);
+
+    for (int i = 0; i < max - size; i++)
+    {
+        printf(" ");
+    }
+    if (strcmp(arr, "____") == 0)printf(" %s|", "    ");
+    else printf(" %s|", arr);
+}
+
+
+void print_table_format(int size)
+{
+    size = (size + 2) * 6 + 10;
+    for (int i = 0; i < size; i++)
+    {
+        printf("─");
+    }
+    printf("\n");
+}
+
+
+int get_max(char  arr[][6][MAX])
+{
+    int max = 0;
+    for (int i = 0; i < 13; i++)
+    {
+        for (int j = 0; j < 6; j++)
+        {
+            if (strlen(arr[i][j]) > max)max = strlen(arr[i][j]);
+        }
+    }
+
+    return max;
+}
+
 
 void print_date(int i, int iter)
 {
@@ -14,7 +50,7 @@ void print_date(int i, int iter)
     if (i == 0)
     {
         printf("Mon");
-        for (int j = 0; j < iter-1; j++)
+        for (int j = 0; j < iter; j++)
         {
             printf(" ");
         }
@@ -95,7 +131,12 @@ void find_subject()
 
                 for (int k = 0; k < 10; k++)//check if the subject is in the structure
                 {
-                    if (strcmp(index[k].subject, arr[i][j]) != 0)//not in specific array
+                    if(strcmp(arr[i][j], "____")==0)//if no subjects, don't print it as a subjects
+                    {
+                      arg_not_in=false;
+                      break;
+                    }
+                    else if (strcmp(index[k].subject, arr[i][j]) != 0)//not in specific array
                     {
                         continue;
                     }
@@ -107,10 +148,6 @@ void find_subject()
                 }
                 if (arg_not_in == true)//if the argument is not in a specific array
                 {
-                    /*for (int p = 0; p < strlen(arr[i][j]); p++)
-                    {
-                        index[idx].subject[p] = arr[i][j][p];
-                    }*/
                     strcpy(index[idx].subject, arr[i][j]);
                     idx++;
                 }
@@ -119,29 +156,34 @@ void find_subject()
         fclose(fp);
         size = idx;
     }
+
+    return size;
 }
 
 void show_time_table(char arr[][6][MAX])
 {
-    printf("time/day |");
+    print_table_format(get_max(arr));
+    printf("|time/day |");
     for (int i = 0; i < 6; i++)
     {
-        print_date(i, 22);//print weekday and weekend
+        print_date(i, get_max(arr));//print weekday and weekend
     }
     printf("\n");
+    print_table_format(get_max(arr));
 
     for (int i = 0; i < 13; i++)
     {
-        if (i == 0)printf(" %02d~%d   |", 9, 10);//print time
-        else printf(" %02d~%d   |", i + 9, i + 10);//print time
+        printf("| %02d~%02d   |", i + 9, i + 10);//print time
 
         for (int j = 0; j < 6; j++)
         {
-            printf("%22s| ", arr[i][j]);//print text read from time_table.txt(class name)
+            print_subject(arr[i][j], get_max(arr));//print text read from time_table.txt(class name)
         }
         printf("\n");
+        print_table_format(get_max(arr));
     }
 }
+
 
 int get_date(char ch[])
 {
@@ -163,18 +205,15 @@ void edit_time_table(FILE* fp, char arr[][6][MAX])
     int Day, start_time, end_time;
 
     char newarr[13][6][MAX] = { 0, };
-ANOTHER:
+
     for (int i = 0; i < 13; i++)
     {
         for (int j = 0; j < 6; j++)
         {
-            for (int k = 0; k < strlen(arr[i][j]); k++)
-            {
-                newarr[i][j][k] = arr[i][j][k];
-            }
+            strcpy(newarr[i][j], arr[i][j]);
         }
     }
-
+ANOTHER:
     printf("Type in the day you want to edit(ex. Mon)\n");
     printf("or 'next' for next>>");
     scanf("%s", &day);
@@ -189,21 +228,22 @@ ANOTHER:
         printf("Class name>>");
         scanf("%s", &class_name);
 
+        system("cls");
+
         start_time -= 9;
         end_time -= 9;
         Day = get_date(day);
 
         for (int i = start_time; i < end_time; i++)
         {
-            for (int j = 0; j < strlen(class_name); j++)
-            {
-                newarr[i][Day][j] = class_name[j];
-            }
+            strcpy(newarr[i][Day], class_name);
         }
         printf("Type in the day you want to edit(ex. Mon)\n");
         printf("or 'next' for next>>");
         scanf("%s", &day);
     }
+    system("cls");
+
     printf("[Original version]\n");
     show_time_table(arr);
 
@@ -212,7 +252,7 @@ ANOTHER:
 
     printf("Type in 1 if you want to save it\n");
     printf("and type in 2 if you want to use the original one\n");
-    printf("and type in 3 if you want to take another attempt>>");
+    printf("and type in 3 if you want to take another attempt(edit)>>");
 
     int rst = 0;
     scanf("%d", &rst);
@@ -229,13 +269,22 @@ ANOTHER:
     }
     else if (rst == 2)
     {
+        for (int i = 0; i < 13; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                fprintf(fp, "%s\n", arr[i][j]);
+            }
+        }
         printf("original one saved. . .");
     }
     else if (rst == 3)
     {
+        system("cls");
         goto ANOTHER;
     }
 }
+
 
 void  time_table()
 {
@@ -248,7 +297,7 @@ AGAIN:
         FILE* make;
         make = fopen("Time_table_.txt", "w");
 
-        char *str = "NONE";
+        char *str = "____";
         for (int i = 0; i < 13; i++)
         {
             for (int j = 0; j < 6; j++)
@@ -285,6 +334,7 @@ AGAIN:
 
     int rst = 0;
     scanf("%d", &rst);
+    system("cls");
 
     if (rst == 1)//edit. get arguments. Make time table out of these arguments, and save then in Time_table_.txt
     {
@@ -292,13 +342,6 @@ AGAIN:
         ftell(out);
         edit_time_table(out, arr);
         fclose(out);
-
-        find_subject();
-        printf("\n\n");
-        for (int i = 0; i < size; i++)
-        {
-            printf("%02d. %s\n", i+1, index[i].subject);
-        }
     }
     else if (rst == 2)//use the original
     {
