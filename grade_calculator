@@ -15,9 +15,23 @@ int main() {
 
 	system("cls");
 	int a = 0;
-	printf("학기별 성적 계산 및 입력 : 1\n");
-	printf("나의 성적 확인 및 관리 : 2\n");
-	printf("사용하실 기능의 숫자를 입력하시오 : ");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+	printf("■■■■■■■■■■■■■■선택창■■■■■■■■■■■■■■\n");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+	printf("■■■┌──────────────┐■■■■■■■■■┌──────────────┐■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│  ■■■■    │■■■\n");
+	printf("■■■│    ■■      │■■■■■■■■■│ ■      ■   │■■■\n");
+	printf("■■■│   ■ ■      │■■■■■■■■■│ ■      ■   │■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│       ■     │■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│     ■       │■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│   ■         │■■■\n");
+	printf("■■■│   ■■■■   │■■■■■■■■■│  ■■■■■  │■■■\n");
+	printf("■■■│ 학기별 성적  │■■■■■■■■■│   나의 성적  │■■■\n");
+	printf("■■■│계산 및 입력  │■■■■■■■■■│ 확인 및 관리 │■■■\n");
+	printf("■■■└──────────────┘■■■■■■■■■└──────────────┘■■■\n");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+	printf("\n원하는 기능의 번호 입력 >> ");
+
 	scanf_s(" %d", &a);
 	if (a == 1) {
 		my_grade();
@@ -73,8 +87,8 @@ void grade_check(int a, int b) {
 	}
 
 	if (fp == NULL) {
-		printf("입력 정보가 존재하지 않습니다\n");
-		printf("입력하시려면 1을 입력해주세요 : ");
+		printf("\n\n\n          입력 정보가 존재하지 않습니다\n");
+		printf("\n\n\n\n\n\n입력하시려면 1을 입력해주세요 : ");
 		scanf("%d", &c);
 		if (c == 1) put_data(a, b);
 	}
@@ -96,7 +110,7 @@ void my_grade() {
 	int a = 0;
 	int b, c = 0;
 	int count4 = 1;
-	printf("입력하실 학기를 선택하세요\n");
+	printf("■■■■■■■■■■입력하실 학기를 선택하세요■■■■■■■■■■\n");
 	for (int i = 1; i < 7; i++) {
 		for (int e = 1; e < 3; e++) {
 			printf("%d. %d학년 %d학기\n",count4, i, e);
@@ -141,6 +155,13 @@ void my_grade() {
 	else if (a == 12) {
 		b = 6; c = 2;
 	}
+	else {
+		printf("잘못된 입력입니다. 돌아가시려면 0을 입력해주세요");
+		printf("\n >> ");
+		int x = -1;
+		scanf("%d", &x);
+		if (x == 0) main();
+	}
 	grade_check(b, c);
 }
 
@@ -167,13 +188,14 @@ void put_data(a, b) {
 		char grade1[3];
 		system("cls");
 		printf("%d학년 %d학기\n", a, b);
-		printf("학점계산기입니다.\n입력을 모두 하였을경우 1을 입력하여 주십시오.\n");
-		printf("종료 ㅡ> 입력 1\n");
+		printf("학점계산기입니다.\n입력을 모두 하였을경우 과목명에 1을 입력하여 주십시오.\n\n");
 		if (count3 > 0) {
 			for (int w = 0; w < count3; w++) {
 				printf("입력된 과목명 : %s\n", name[w]);
 			}
+			printf("\n");
 		}
+
 		printf("과목명을 입력하여 주십시오 : ");
 		rewind(stdin);
 		scanf("%[^\n]", &name[i]);
@@ -442,8 +464,10 @@ void grade_manage() {
 	FILE* fp = NULL;
 	fp = fopen("test.txt", "r");
 	fclose(fp);
+	int count = 0;
 
 	if (fopen("1-1.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■1학년 1학기■■■■■■■■■■\n");
 		fp = fopen("1-1.txt", "r");
 		printf("\n");
@@ -454,6 +478,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("1-2.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■1학년 2학기■■■■■■■■■■\n");
 		fp = fopen("1-2.txt", "r");
 		printf("\n");
@@ -464,6 +489,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("2-1.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■2학년 1학기■■■■■■■■■■\n");
 		fp = fopen("2-1.txt", "r");
 		printf("\n");
@@ -474,6 +500,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("2-2.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■2학년 2학기■■■■■■■■■■\n");
 		fp = fopen("2-2.txt", "r");
 		printf("\n");
@@ -484,6 +511,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("3-1.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■3학년 1학기■■■■■■■■■■\n");
 		fp = fopen("3-1.txt", "r");
 		printf("\n");
@@ -494,6 +522,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("3-2.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■3학년 2학기■■■■■■■■■■\n");
 		fp = fopen("3-2.txt", "r");
 		printf("\n");
@@ -504,6 +533,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("4-1.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■4학년 1학기■■■■■■■■■■\n");
 		fp = fopen("4-1.txt", "r");
 		printf("\n");
@@ -514,6 +544,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("4-2.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■4학년 2학기■■■■■■■■■■\n");
 		fp = fopen("4-2.txt", "r");
 		printf("\n");
@@ -524,6 +555,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("5-1.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■5학년 1학기■■■■■■■■■■\n");
 		fp = fopen("5-1.txt", "r");
 		printf("\n");
@@ -534,6 +566,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("5-2.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■5학년 2학기■■■■■■■■■■\n");
 		fp = fopen("5-2.txt", "r");
 		printf("\n");
@@ -544,6 +577,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("6-1.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■6학년 1학기■■■■■■■■■■\n");
 		fp = fopen("6-1.txt", "r");
 		printf("\n");
@@ -554,6 +588,7 @@ void grade_manage() {
 		fclose(fp);
 	}
 	if (fopen("6-2.txt", "r") != NULL) {
+		count++;
 		printf("\n■■■■■■■■■■6학년 2학기■■■■■■■■■■\n");
 		fp = fopen("6-2.txt", "r");
 		printf("\n");
@@ -563,6 +598,7 @@ void grade_manage() {
 		printf("\n");
 		fclose(fp);
 	}
+	if (count == 0) printf("■■■■■■■■■■입력된 정보가 없습니다.■■■■■■■■■■\n");
 	int o = 0;
 	printf("\n돌아가려면 1을 입력하세요 : ");
 	scanf("%d", &o);
