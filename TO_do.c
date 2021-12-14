@@ -44,7 +44,7 @@ void choice()
 	char buffer[1000] = { 0, };
 	FILE* fp;
 	fopen_s(&fp, "To_do_things.txt", "a+");
-	printf("다음 중 하고 싶은 작업의 번호를 입력하세요\n1. 이전 정보 불러오기\n2. 이어서 작성하기\n");
+	printf("다음 중 하고 싶은 작업의 번호를 입력하세요\n1. 이전 정보 불러오기\n2. 이어서 작성하기\n3. 메인 화면으로 나가기\n");
 	scanf_s("%d", &num);
 	system("cls");
 	Sleep(1000);
@@ -53,10 +53,15 @@ void choice()
 	case 1:
 		fread(buffer, 1, 1000, fp);
 		printf("%s", buffer);
+		printf("\n5초후에 선택 화면으로 나갑니다.\n");
+		Sleep(5000);
+		choice();
 		break;
 	case 2:
 		to_do(fp);
 		break;
+	case 3:
+		main();
 	default:
 		break;
 	}
