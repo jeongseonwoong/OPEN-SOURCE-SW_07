@@ -504,8 +504,9 @@ void grade_manage() {
 	system("cls");
 	char line[1000];
 	FILE* fp = NULL;
-	fp = fopen("test.txt", "r");
+	fp = fopen("test.txt", "w");
 	fclose(fp);
+	fp = fopen("test.txt", "r");
 	int count = 0;
 
 	if (fopen("1-1.txt", "r") != NULL) {
