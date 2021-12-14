@@ -82,4 +82,4 @@ void time_table();
 int main_screen();
 int menu(FILE* fp, int num);
 void to_do(FILE* fp);
-void choice(FILE* fp);
+void choice();
