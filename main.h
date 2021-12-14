@@ -1,4 +1,4 @@
-#ifndef TIME_TABLE_H
+ï»¿#ifndef TIME_TABLE_H
 #define TIME_TABLE_H
 
 struct Node {
@@ -18,8 +18,9 @@ struct list {
 }person;
 #endif
 
+
 #include "menu.h"
 #include "Time_table.h"
 #include "To_do.h"
-#include "ÇĞ½À ÇÁ·Î±×·¥.h"
-#include "Çì´õ.h"
+#include "í•™ìŠµ í”„ë¡œê·¸ë¨.h"
+#include "í—¤ë”.h"
