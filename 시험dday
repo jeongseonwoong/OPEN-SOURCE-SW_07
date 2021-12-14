@@ -25,6 +25,10 @@ int dday2()
 			i = 0;
 			시험날짜();
 			scanf_s("%s", testday, MAX);
+			if (strcmp(testday, "exit") == 0)
+			{
+				break;
+			}
 			system("cls");
 			tmp = 0;
 			while (testday[i] != '-'&&i<4)
@@ -87,6 +91,10 @@ int dday2()
 			day = day1 - pday;
 			시험이름();
 			scanf_s("%s", testname, MAX);
+			if (strcmp(testname, "exit") == 0)
+			{
+				break;
+			}
 			system("cls");
 			if (day < 0)
 			{
@@ -239,12 +247,9 @@ int dday2()
 							dyear--;
 							dmonth = 12 + dmonth;
 						}
-						if (dyear < 0)
+						if (dyear >= 0)
 						{
-							이미지나간시험날짜();
-						}
-						else {
-							저장된시험(dyear,dmonth,dday,frs[i]);
+							저장된시험(dyear, dmonth, dday, frs[i]);
 						}
 					}
 					i++;
