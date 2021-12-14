@@ -39,8 +39,11 @@ void to_do(FILE* fp)
 
 void choice(FILE* fp)
 {
+	system("cls");
 	int num = 0;
 	char buffer[1000] = { 0, };
+	FILE* fp;
+	fopen_s(&fp, "To_do_things.txt", "a+");
 	printf("다음 중 하고 싶은 작업의 번호를 입력하세요\n1. 이전 정보 불러오기\n2. 이어서 작성하기\n");
 	scanf_s("%d", &num);
 	system("cls");
