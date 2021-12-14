@@ -2,7 +2,77 @@
 #include "Time_table.h"
 
 #define MAX 100
-int size=0;
+int size = 0;
+
+
+void interface_word(char arr1[], char arr2[])
+{
+    if (strcmp(arr2, "") == 0)
+    {
+        int size = strlen(arr1);
+        for (int i = 0; i < (size + 2)/2; i++)
+        {
+            printf("■");
+        }
+        printf("\n");
+        printf("%s", arr1);
+        printf("\n");
+        for (int i = 0; i < (size + 2)/2; i++)
+        {
+            printf("■");
+        }
+        printf("\n");
+    }
+    else
+    {
+        int size1 = strlen(arr1);
+        int size2 = strlen(arr2);
+        int max = size1;
+        bool first_bigger = true;
+        if (size2 > size1)
+        {
+            max = size2;
+            first_bigger = false;
+        }
+
+        for (int i = 0; i < (max + 2)/2; i++)
+        {
+            printf("■");
+        }
+        if (first_bigger == true)
+        {
+            printf("\n");
+            printf("%s", arr1);
+            printf("\n");
+            printf("\n");
+            printf("%s", arr2);
+            for (int i = 0; i < (max - size2); i++)
+            {
+                printf(" ");
+            }
+            printf("\n");
+        }
+        else
+        {
+            printf("\n");
+            printf("%s", arr1);
+            for (int i = 0; i < max - size2; i++)
+            {
+                printf(" ");
+            }
+            printf("\n");
+            printf("\n");
+            printf("%s", arr2);
+            printf("\n");
+        }
+        for (int i = 0; i < (max + 2)/2; i++)
+        {
+            printf("■");
+        }
+        printf("\n");
+    }
+
+}
 
 
 void print_subject(char arr[], int max)
@@ -27,7 +97,6 @@ void print_table_format(int size)
     }
     printf("\n");
 }
-
 
 int get_max(char  arr[][6][MAX])
 {
@@ -103,7 +172,125 @@ void print_date(int i, int iter)
     }
 }
 
-void find_subject()
+
+void interface_choice(int choice_num, int choice_length, char arr[][MAX])
+{
+    for (int i = 0; i < 15; i++)
+    {
+        printf("■");
+    }
+    printf("\n");
+    for (int i = 0; i < 6; i++)
+    {
+        printf("■");
+    }
+    printf("선택창");
+    for (int i = 0; i < 6; i++)
+    {
+        printf("■");
+    }
+    printf("\n");
+    for (int i = 0; i < 15; i++)
+    {
+        printf("■");
+    }
+    printf("\n");
+
+    switch (choice_num-1)
+    {
+
+    case 1:
+        interface_one(arr[0]);
+        interface_zero(arr[choice_num-1]);
+        break;
+    case 2:
+        interface_one(arr[0]);
+        interface_two(arr[1]);
+        interface_zero(arr[choice_num-1]);
+        break;
+    case 3:
+        interface_one(arr[0]);
+        interface_two(arr[1]);
+        interface_three(arr[2]);
+        interface_zero(arr[choice_num-1]);
+        break;
+    }
+    for (int i = 0; i < 15; i++)
+    {
+        printf("■");
+    }
+    printf("\n");
+}
+
+
+void interface_one(char arr[])
+{
+    printf("■■■┌──────────────┐■■■■\n");
+    printf("■■■│      ■      │■■■■\n");
+    printf("■■■│    ■■      │■■■■\n");
+    printf("■■■│   ■ ■      │■■■■\n");
+    printf("■■■│      ■      │■■■■\n");
+    printf("■■■│      ■      │■■■■\n");
+    printf("■■■│      ■      │■■■■\n");
+    printf("■■■│   ■■■■   │■■■■\n");
+    printf("■■■│ %s  │■■■■\n", arr);
+    printf("■■■│              │■■■■\n");
+    printf("■■■└──────────────┘■■■■\n");
+
+}
+
+void interface_two(char arr[])
+{
+    printf("■■■┌──────────────┐■■■■\n");
+    printf("■■■│  ■■■■    │■■■■\n");
+    printf("■■■│ ■      ■   │■■■■\n");
+    printf("■■■│ ■      ■   │■■■■\n");
+    printf("■■■│       ■     │■■■■\n");
+    printf("■■■│     ■       │■■■■\n");
+    printf("■■■│   ■         │■■■■\n");
+    printf("■■■│  ■■■■■  │■■■■\n");
+    printf("■■■│   %s  │■■■■\n", arr);
+    printf("■■■│              │■■■■\n");
+    printf("■■■└──────────────┘■■■■\n");
+}
+
+void interface_three(char arr[])
+{
+
+    printf("■■■┌──────────────┐■■■■\n");
+    printf("■■■│   ■■■■   │■■■■\n");
+    printf("■■■│  ■      ■  │■■■■\n");
+    printf("■■■│        ■    │■■■■\n");
+    printf("■■■│    ■■■    │■■■■\n");
+    printf("■■■│         ■   │■■■■\n");
+    printf("■■■│  ■      ■  │■■■■\n");
+    printf("■■■│   ■■■■   │■■■■\n");
+    printf("■■■│   %s  │■■■■\n", arr);
+    printf("■■■│              │■■■■\n");
+    printf("■■■└──────────────┘■■■■\n");
+
+}
+
+void interface_zero(char arr[])
+{
+
+    printf("■■■┌──────────────┐■■■■\n");
+    printf("■■■│     ■■     │■■■■\n");
+    printf("■■■│   ■    ■   │■■■■\n");
+    printf("■■■│  ■      ■  │■■■■\n");
+    printf("■■■│  ■      ■  │■■■■\n");
+    printf("■■■│  ■      ■  │■■■■\n");
+    printf("■■■│   ■    ■   │■■■■\n");
+    printf("■■■│     ■■     │■■■■\n");
+    printf("■■■│   %s  │■■■■\n", arr);
+    printf("■■■│              │■■■■\n");
+    printf("■■■└──────────────┘■■■■\n");
+}
+
+
+
+
+int find_subject()
 {
     FILE* fp;
     char arr[13][6][MAX] = { 0, };
@@ -111,7 +298,8 @@ void find_subject()
     fp = fopen("Time_table_.txt", "rb");
     if (fp == NULL)
     {
-        printf("Wrong");
+        interface_word("Wrong", "");
+//        printf("Wrong");
         return 0;
     }
     else
@@ -131,10 +319,10 @@ void find_subject()
 
                 for (int k = 0; k < 10; k++)//check if the subject is in the structure
                 {
-                    if(strcmp(arr[i][j], "____")==0)//if no subjects, don't print it as a subjects
+                    if (strcmp(arr[i][j], "____") == 0)//if no subject, don't print it as a subject
                     {
-                      arg_not_in=false;
-                      break;
+                        arg_not_in = false;
+                        break;
                     }
                     else if (strcmp(index[k].subject, arr[i][j]) != 0)//not in specific array
                     {
@@ -160,8 +348,20 @@ void find_subject()
     return size;
 }
 
-void show_time_table(char arr[][6][MAX])
+
+void show_time_table(char arr[][6][MAX], int size)
 {
+    size = (size + 2) * 3 + 5;
+    for (int i = 0; i < size / 2 ; i++)
+    {
+        printf("■");
+    }
+    printf("시간표");
+    for (int i = 0; i < size / 2; i++)
+    {
+        printf("■");
+    }
+    printf("\n");
     print_table_format(get_max(arr));
     printf("|time/day |");
     for (int i = 0; i < 6; i++)
@@ -199,6 +399,7 @@ int get_date(char ch[])
     }
 }
 
+
 void edit_time_table(FILE* fp, char arr[][6][MAX])
 {
     char day[10], class_name[MAX];
@@ -214,18 +415,29 @@ void edit_time_table(FILE* fp, char arr[][6][MAX])
         }
     }
 ANOTHER:
-    printf("Type in the day you want to edit(ex. Mon)\n");
-    printf("or 'next' for next>>");
+    interface_word("Type in the day you want to deit(ex. Mon)", "or 'next' for next");
+//    printf("Type in the day you want to edit(ex. Mon)\n");
+//    printf("or 'next' for next>>");
+    printf(">>");
     scanf("%s", &day);
     while (strcmp(day, "next") != 0)
     {
-        printf("Starting time>>");
+        printf("\n");
+        interface_word("Starting time", "");
+//        printf("Starting time>>");
+        printf(">>");
         scanf("%d", &start_time);
 
-        printf("Ending time>>");
+        printf("\n");
+        interface_word("Ending time", "");
+//        printf("Ending time>>");
+        printf(">>");
         scanf("%d", &end_time);
 
-        printf("Class name>>");
+        printf("\n");
+        interface_word("Class name", "");
+//        printf("Class name>>");
+        printf(">>");
         scanf("%s", &class_name);
 
         system("cls");
@@ -238,21 +450,34 @@ ANOTHER:
         {
             strcpy(newarr[i][Day], class_name);
         }
-        printf("Type in the day you want to edit(ex. Mon)\n");
-        printf("or 'next' for next>>");
+        interface_word("Type in the day you want to edit(ex. Mon)", "or 'next' for next");
+//        printf("Type in the day you want to edit(ex. Mon)\n");
+//       printf("or 'next' for next>>");
+        printf(">>");
         scanf("%s", &day);
     }
     system("cls");
 
-    printf("[Original version]\n");
-    show_time_table(arr);
+    interface_word("[Original version]", "");
+//    printf("[Original version]\n");
+    show_time_table(arr, get_max(arr));
 
-    printf("\n[Edited version]\n");
-    show_time_table(newarr);
+    interface_word("[Edited version]", "");
+//    printf("\n[Edited version]\n");
+    show_time_table(newarr, get_max(newarr));
+    printf("\n\n");
+    interface_word("넘어가려면 엔터. . .", "");
+//    printf("넘어가려면 엔터. . .");
+    char enter;
+    scanf("%c%c", &enter);
+    system("cls");
 
-    printf("Type in 1 if you want to save it\n");
-    printf("and type in 2 if you want to use the original one\n");
-    printf("and type in 3 if you want to take another attempt(edit)>>");
+    char interfaces[4][MAX];
+    strcpy(interfaces[0], "Save the new one");
+    strcpy(interfaces[1], "Use the original one");
+    strcpy(interfaces[2], "Additional edit");
+    interface_choice(3, 100, interfaces);
+    printf("[선택창]>> ");
 
     int rst = 0;
     scanf("%d", &rst);
@@ -265,7 +490,8 @@ ANOTHER:
                 fprintf(fp, "%s\n", newarr[i][j]);
             }
         }
-        printf("edited one saved. . .");
+        interface_word("edited one saved. . .", "");
+//        printf("edited one saved. . .");
     }
     else if (rst == 2)
     {
@@ -276,7 +502,8 @@ ANOTHER:
                 fprintf(fp, "%s\n", arr[i][j]);
             }
         }
-        printf("original one saved. . .");
+        interface_word("original one saved. . .", "");
+//        printf("original one saved. . .");
     }
     else if (rst == 3)
     {
@@ -319,18 +546,25 @@ AGAIN:
                 fscanf(in, "%s", arr[i][j]);//read from the Time_table_.txt
             }
         }
-        show_time_table(arr);
+        show_time_table(arr, get_max(arr));
+        interface_word("넘어가려면 엔터. . .", "");
+//        printf("넘어가려면 엔터. . .");
+        char enter;
+        scanf("%c", &enter);
+        system("cls");
 
-        printf("\n[PROGRAM]>>Press 1 if you want to edit the original one or make a new one\n");
-        printf("[PROGRAM]>>Press 2 if you want to use the original one\n");
-        printf("[PROGRAM]>>Press 0 if you want to end the program\n");
+        char interfaces[4][MAX];
+        strcpy(interfaces[0], "Edit the original one or make a new one");
+        strcpy(interfaces[1], "Use the original one");
+        strcpy(interfaces[2], "End the program");
+        interface_choice(3, 100, interfaces);
 
         fclose(in);
 
     }
     FILE* out;
 
-    printf("[ME]>> ");
+    printf("[선택창]>> ");
 
     int rst = 0;
     scanf("%d", &rst);
@@ -345,11 +579,15 @@ AGAIN:
     }
     else if (rst == 2)//use the original
     {
-        printf("[PROGRAM]>>time table saved. . .\n\n");
-        printf("[PROGRAM]>>See you later. . .");
+        interface_word("time table saved. . .", "");
+        printf("\n\n");
+        interface_word("See you later. . .", "");
+        //printf("time table saved. . .\n\n");
+        //printf("See you later. . .");
     }
     else if (rst == 0)//end the program
     {
-        printf("[PROGRAM]>>See you later. . .");
+        interface_word("See you later. . .", "");
+//        printf("See you later. . .");
     }
 }

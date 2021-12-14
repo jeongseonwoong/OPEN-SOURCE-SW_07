@@ -21,7 +21,7 @@ void 이상한날짜();
 void 달력선택창();
 void 달력저장날짜();
 void 달력확인날짜();
-void 달력년도(int);
+void 달력년도(int,int);
 void 달력년도2();
 void 달력달2();
 void 달력보고선택();

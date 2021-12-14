@@ -11,7 +11,7 @@ int dday()
 		FILE* fpdday;
 		int i = 0, j = 0, f = 0, file=0;
 		char suneong[MAX], date[MAX],fdelete1[MAX];
-		int year, month, day, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, fsave = 0, fdelete = 100, interchoose;// 2021-11-06
+			int year=0, month=0, day=0, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, fsave = 0, fdelete = 100, interchoose;
 		int f1[MAX], f2[MAX], f3[MAX], f4[MAX], f5[MAX], f6[MAX], f7[MAX], s1, s2, s3, s4, s5, s6, s7;
 		const char s2022[MAX] = "2021-11-18";
 		const char s2023[MAX] = "2022-11-17";
