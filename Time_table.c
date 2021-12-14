@@ -1,7 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Time_table.h"
 
-#define MAX 100
 int size = 0;
 
 
@@ -98,6 +97,7 @@ void print_table_format(int size)
     printf("\n");
 }
 
+
 int get_max(char  arr[][6][MAX])
 {
     int max = 0;
@@ -105,7 +105,8 @@ int get_max(char  arr[][6][MAX])
     {
         for (int j = 0; j < 6; j++)
         {
-            if (strlen(arr[i][j]) > max)max = strlen(arr[i][j]);
+            int size = strlen(arr[i][j]);
+            if (size > max)max = size;
         }
     }
 
@@ -173,7 +174,7 @@ void print_date(int i, int iter)
 }
 
 
-void interface_choice(int choice_num, int choice_length, char arr[][MAX])
+void interface_choice(int choice_num, char arr[][MAX])
 {
     for (int i = 0; i < 15; i++)
     {
@@ -233,11 +234,50 @@ void interface_one(char arr[])
     printf("■■■│      ■      │■■■■\n");
     printf("■■■│      ■      │■■■■\n");
     printf("■■■│   ■■■■   │■■■■\n");
-    printf("■■■│ %s  │■■■■\n", arr);
-    printf("■■■│              │■■■■\n");
+    if (strlen(arr) < 14)
+    {
+        printf("■■■│%s", arr);
+        int size = strlen(arr);
+        for (int i = 0; i < 14 - size; i++)
+        {
+            printf(" ");
+        }
+        printf("│■■■■\n");
+        printf("■■■│              │■■■■\n");
+    }
+    else
+    {
+        printf("■■■│");
+        for (int i = 0; i < 14; i++)
+        {
+            printf("%c", arr[i]);
+        }
+        printf("│■■■■\n");
+        printf("■■■│");
+        int end = 28;
+        for (int i = 14; i<28; i++)
+        {
+            if (arr[i] == '\0')
+            {
+                printf(" ");
+                end = i;
+            }
+            else if(end>i)
+            {
+                printf("%c", arr[i]);
+            }
+            else
+            {
+                printf(" ");
+            }
+
+        }
+        printf("│■■■■\n");
+    }
     printf("■■■└──────────────┘■■■■\n");
 
 }
+
 
 void interface_two(char arr[])
 {
@@ -249,10 +289,50 @@ void interface_two(char arr[])
     printf("■■■│     ■       │■■■■\n");
     printf("■■■│   ■         │■■■■\n");
     printf("■■■│  ■■■■■  │■■■■\n");
-    printf("■■■│   %s  │■■■■\n", arr);
-    printf("■■■│              │■■■■\n");
+    if (strlen(arr) < 14)
+    {
+        printf("■■■│%s", arr);
+        int size = strlen(arr);
+        for (int i = 0; i < 14 - size; i++)
+        {
+            printf(" ");
+        }
+        printf("│■■■■\n");
+        printf("■■■│              │■■■■\n");
+    }
+    else
+    {
+        printf("■■■│");
+        for (int i = 0; i < 14; i++)
+        {
+            printf("%c", arr[i]);
+        }
+        printf("│■■■■\n");
+        printf("■■■│");
+        int end = 28;
+        for (int i = 14; i < 28; i++)
+        {
+            if (arr[i] == '\0')
+            {
+                printf(" ");
+                end = i;
+            }
+            else if (end > i)
+            {
+                printf("%c", arr[i]);
+            }
+            else
+            {
+                printf(" ");
+            }
+
+        }
+        printf("│■■■■\n");
+    }
+
     printf("■■■└──────────────┘■■■■\n");
 }
+
 
 void interface_three(char arr[])
 {
@@ -264,12 +344,51 @@ void interface_three(char arr[])
     printf("■■■│    ■■■    │■■■■\n");
     printf("■■■│         ■   │■■■■\n");
     printf("■■■│  ■      ■  │■■■■\n");
-    printf("■■■│   ■■■■   │■■■■\n");
-    printf("■■■│   %s  │■■■■\n", arr);
-    printf("■■■│              │■■■■\n");
+    printf("■■■│   ■■■■   │■■■■\n");    if (strlen(arr) < 14)
+    {
+        printf("■■■│%s", arr);
+        int size = strlen(arr);
+        for (int i = 0; i < 14 - size; i++)
+        {
+            printf(" ");
+        }
+        printf("│■■■■\n");
+        printf("■■■│              │■■■■\n");
+    }
+    else
+    {
+        printf("■■■│");
+        for (int i = 0; i < 14; i++)
+        {
+            printf("%c", arr[i]);
+        }
+        printf("│■■■■\n");
+        printf("■■■│");
+        int end = 28;
+        for (int i = 14; i < 28; i++)
+        {
+            if (arr[i] == '\0')
+            {
+                printf(" ");
+                end = i;
+            }
+            else if (end > i)
+            {
+                printf("%c", arr[i]);
+            }
+            else
+            {
+                printf(" ");
+            }
+
+        }
+        printf("│■■■■\n");
+    }
+
     printf("■■■└──────────────┘■■■■\n");
 
 }
+
 
 void interface_zero(char arr[])
 {
@@ -282,12 +401,49 @@ void interface_zero(char arr[])
     printf("■■■│  ■      ■  │■■■■\n");
     printf("■■■│   ■    ■   │■■■■\n");
     printf("■■■│     ■■     │■■■■\n");
-    printf("■■■│   %s  │■■■■\n", arr);
-    printf("■■■│              │■■■■\n");
+    int size = strlen(arr);
+    if (size < 14)
+    {
+        printf("■■■│%s", arr);
+        for (int i = 0; i < 14 - size; i++)
+        {
+            printf(" ");
+        }
+        printf("│■■■■\n");
+        printf("■■■│              │■■■■\n");
+    }
+    else
+    {
+        printf("■■■│");
+        for (int i = 0; i < 14; i++)
+        {
+            printf("%c", arr[i]);
+        }
+        printf("│■■■■\n");
+        printf("■■■│");
+        int end = 28;
+        for (int i = 14; i < 28; i++)
+        {
+            if (arr[i] == '\0')
+            {
+                printf(" ");
+                end = i;
+            }
+            else if (end > i)
+            {
+                printf("%c", arr[i]);
+            }
+            else
+            {
+                printf(" ");
+            }
+
+        }
+        printf("│■■■■\n");
+    }
+
     printf("■■■└──────────────┘■■■■\n");
 }
-
-
 
 
 int find_subject()
@@ -299,7 +455,7 @@ int find_subject()
     if (fp == NULL)
     {
         interface_word("Wrong", "");
-//        printf("Wrong");
+
         return 0;
     }
     else
@@ -362,14 +518,15 @@ void show_time_table(char arr[][6][MAX], int size)
         printf("■");
     }
     printf("\n");
-    print_table_format(get_max(arr));
+    int arr_size = get_max(arr);
+    print_table_format(arr_size);
     printf("|time/day |");
     for (int i = 0; i < 6; i++)
     {
-        print_date(i, get_max(arr));//print weekday and weekend
+        print_date(i, arr_size);//print weekday and weekend
     }
     printf("\n");
-    print_table_format(get_max(arr));
+    print_table_format(arr_size);
 
     for (int i = 0; i < 13; i++)
     {
@@ -377,10 +534,10 @@ void show_time_table(char arr[][6][MAX], int size)
 
         for (int j = 0; j < 6; j++)
         {
-            print_subject(arr[i][j], get_max(arr));//print text read from time_table.txt(class name)
+            print_subject(arr[i][j], arr_size);//print text read from time_table.txt(class name)
         }
         printf("\n");
-        print_table_format(get_max(arr));
+        print_table_format(arr_size);
     }
 }
 
@@ -395,6 +552,7 @@ int get_date(char ch[])
     else if (strcmp(ch, "Sat") == 0)return 5;
     else
     {
+        interface_word("Error", "");
         get_date(ch);
     }
 }
@@ -415,28 +573,27 @@ void edit_time_table(FILE* fp, char arr[][6][MAX])
         }
     }
 ANOTHER:
-    interface_word("Type in the day you want to deit(ex. Mon)", "or 'next' for next");
-//    printf("Type in the day you want to edit(ex. Mon)\n");
-//    printf("or 'next' for next>>");
+    interface_word("Type in the day you want to edit(ex. Mon)", "or 'next' for next");
+
     printf(">>");
     scanf("%s", &day);
     while (strcmp(day, "next") != 0)
     {
         printf("\n");
         interface_word("Starting time", "");
-//        printf("Starting time>>");
+
         printf(">>");
         scanf("%d", &start_time);
 
         printf("\n");
         interface_word("Ending time", "");
-//        printf("Ending time>>");
+
         printf(">>");
         scanf("%d", &end_time);
 
         printf("\n");
         interface_word("Class name", "");
-//        printf("Class name>>");
+
         printf(">>");
         scanf("%s", &class_name);
 
@@ -451,38 +608,53 @@ ANOTHER:
             strcpy(newarr[i][Day], class_name);
         }
         interface_word("Type in the day you want to edit(ex. Mon)", "or 'next' for next");
-//        printf("Type in the day you want to edit(ex. Mon)\n");
-//       printf("or 'next' for next>>");
+
         printf(">>");
         scanf("%s", &day);
     }
     system("cls");
 
     interface_word("[Original version]", "");
-//    printf("[Original version]\n");
+
+    printf("\n");
     show_time_table(arr, get_max(arr));
 
     interface_word("[Edited version]", "");
-//    printf("\n[Edited version]\n");
+
+    printf("\n");
     show_time_table(newarr, get_max(newarr));
     printf("\n\n");
     interface_word("넘어가려면 엔터. . .", "");
-//    printf("넘어가려면 엔터. . .");
-    char enter;
-    scanf("%c%c", &enter);
+
+    rewind(stdin);
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
     system("cls");
 
     char interfaces[4][MAX];
-    strcpy(interfaces[0], "Save the new one");
-    strcpy(interfaces[1], "Use the original one");
-    strcpy(interfaces[2], "Additional edit");
-    interface_choice(3, 100, interfaces);
+    strcpy(interfaces[0], " Save the new one");
+    strcpy(interfaces[1], " Use the original one");
+    strcpy(interfaces[2], " Additional edit");
+    strcpy(interfaces[3], " End the program");
+    interface_choice(4, interfaces);
     printf("[선택창]>> ");
 
     int rst = 0;
     scanf("%d", &rst);
     if (rst == 1)
     {
+        system("cls");
+
+        interface_word("saving time table.", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("saving time table. .", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("saving time table. . .", "");
+        Sleep(TIME);
+        system("cls");
         for (int i = 0; i < 13; i++)
         {
             for (int j = 0; j < 6; j++)
@@ -490,11 +662,25 @@ ANOTHER:
                 fprintf(fp, "%s\n", newarr[i][j]);
             }
         }
-        interface_word("edited one saved. . .", "");
-//        printf("edited one saved. . .");
+        interface_word("edited one saved. . !", "(넘어가려면 엔터. . .)");
+
+        rewind(stdin);
+        char c;
+        while ((c = getchar()) != '\n' && c != EOF);
     }
     else if (rst == 2)
     {
+        system("cls");
+
+        interface_word("saving time table.", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("saving time table. .", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("saving time table. . .", "");
+        Sleep(TIME);
+        system("cls");
         for (int i = 0; i < 13; i++)
         {
             for (int j = 0; j < 6; j++)
@@ -502,13 +688,31 @@ ANOTHER:
                 fprintf(fp, "%s\n", arr[i][j]);
             }
         }
-        interface_word("original one saved. . .", "");
-//        printf("original one saved. . .");
+        interface_word("original one saved. . !", "(넘어가려면 엔터. . .)");
+
+        rewind(stdin);
+        char c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
     }
     else if (rst == 3)
     {
         system("cls");
         goto ANOTHER;
+    }
+    else
+    {
+        system("cls");
+
+
+        for (int i = 0; i < 13; i++)
+        {
+            for (int j = 0; j < 6; j++)
+            {
+                fprintf(fp, "%s\n", arr[i][j]);
+            }
+        }
+
     }
 }
 
@@ -548,16 +752,18 @@ AGAIN:
         }
         show_time_table(arr, get_max(arr));
         interface_word("넘어가려면 엔터. . .", "");
-//        printf("넘어가려면 엔터. . .");
-        char enter;
-        scanf("%c", &enter);
+
+        rewind(stdin);
+        char c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
         system("cls");
 
         char interfaces[4][MAX];
-        strcpy(interfaces[0], "Edit the original one or make a new one");
-        strcpy(interfaces[1], "Use the original one");
-        strcpy(interfaces[2], "End the program");
-        interface_choice(3, 100, interfaces);
+        strcpy(interfaces[0], " Edit the original one");
+        strcpy(interfaces[1], " Use the original one");
+        strcpy(interfaces[2], " End the program");
+        interface_choice(3, interfaces);
 
         fclose(in);
 
@@ -573,21 +779,68 @@ AGAIN:
     if (rst == 1)//edit. get arguments. Make time table out of these arguments, and save then in Time_table_.txt
     {
         out = fopen("Time_table_.txt", "w");
-        ftell(out);
+
         edit_time_table(out, arr);
         fclose(out);
+
+        system("cls");
+
+        interface_word("Going to main.", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("Going to main. .", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("Going to main. . .", "");
+        Sleep(TIME);
+        system("cls");
     }
     else if (rst == 2)//use the original
     {
-        interface_word("time table saved. . .", "");
-        printf("\n\n");
-        interface_word("See you later. . .", "");
-        //printf("time table saved. . .\n\n");
-        //printf("See you later. . .");
+        system("cls");
+
+        interface_word("saving time table.", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("saving time table. .", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("saving time table. . .", "");
+        Sleep(TIME);
+        system("cls");
+
+        interface_word("time table saved. . !", "(넘어가려면 엔터. . .)");
+
+        rewind(stdin);
+        char c;
+        while ((c = getchar()) != '\n' && c != EOF);
+
+        system("cls");
+
+        interface_word("Going to main.", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("Going to main. .", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("Going to main. . .", "");
+        Sleep(TIME);
+        system("cls");
+
     }
     else if (rst == 0)//end the program
     {
-        interface_word("See you later. . .", "");
-//        printf("See you later. . .");
+        system("cls");
+
+        interface_word("Going to main.", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("Going to main. .", "");
+        Sleep(TIME);
+        system("cls");
+        interface_word("Going to main. . .", "");
+        Sleep(TIME);
+        system("cls");
+
     }
 }
