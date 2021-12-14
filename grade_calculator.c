@@ -1,6 +1,38 @@
 #include "헤더.h"
 
 
+void grade_main() {
+
+	system("cls");
+	int a = 0;
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+	printf("■■■■■■■■■■■■■■선택창■■■■■■■■■■■■■■\n");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+	printf("■■■┌──────────────┐■■■■■■■■■┌──────────────┐■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│  ■■■■    │■■■\n");
+	printf("■■■│    ■■      │■■■■■■■■■│ ■      ■   │■■■\n");
+	printf("■■■│   ■ ■      │■■■■■■■■■│ ■      ■   │■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│       ■     │■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│     ■       │■■■\n");
+	printf("■■■│      ■      │■■■■■■■■■│   ■         │■■■\n");
+	printf("■■■│   ■■■■   │■■■■■■■■■│  ■■■■■  │■■■\n");
+	printf("■■■│ 학기별 성적  │■■■■■■■■■│   나의 성적  │■■■\n");
+	printf("■■■│계산 및 입력  │■■■■■■■■■│ 확인 및 관리 │■■■\n");
+	printf("■■■└──────────────┘■■■■■■■■■└──────────────┘■■■\n");
+	printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+	printf("\n원하는 기능의 번호 입력 >> ");
+
+	scanf_s(" %d", &a);
+	if (a == 1) {
+		my_grade();
+	}
+	if (a == 2) {
+		grade_manage();
+	}
+	else printf("제공되지 않는 기능입니다.");
+}
+
+
 void grade_check(int a, int b) {
 
 	system("cls");
@@ -264,7 +296,7 @@ void put_data(a, b) {
 		int c = 0;
 		scanf("%d", &c);
 		if (c == 1) {
-			main();
+			grade_main();
 		}
 		else exit(1);
 	}
@@ -411,7 +443,7 @@ void put_data(a, b) {
 		scanf("%d", &r);
 		if (r == 1) {
 			system("cls");
-			main();
+			grade_main();
 		}
 	}
 }
@@ -620,5 +652,5 @@ void grade_manage() {
 	int o = 0;
 	printf("\n돌아가려면 1을 입력하세요 : ");
 	scanf("%d", &o);
-	if (o == 1) main();
+	if (o == 1) grade_main();
 }
