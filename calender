@@ -151,23 +151,59 @@ void calender()
             }
             else if (selectopt2 == 2)
             {
-                달력년도2();
-                scanf_s("%d", &year);
-                system("cls");
-                if(year<200||year>2030)
+                strcpy_s(date, "ab");
+                while (strcmp(date, "exit") != 0)
                 {
-                    이상한날짜();
-                    Sleep(400);
+                    달력년도2();
+                    scanf_s("%s", &date, MAX);
+                    if (strcmp(date, "exit") == 0)
+                    {
+                        break;
+                    }
+                    system("cls");
+                    tmp = 0, i = 0;
+                    while (date[i] != '\0')
+                    {
+                        tmp = tmp * 10 + (int)(date[i] - 48);
+                        i++;
+                    }
+                    if (date[0] != '2' || date[1] > '1')
+                    {
+                        continue;
+                    }
+                    year = tmp;
+                    tmp = 0, i = 0;
+                    달력달2();
+                    scanf_s("%s", &date, MAX);
+                    if (strcmp(date, "exit") == 0)
+                    {
+                        break;
+                    }
+                    while (date[i] != '\0')
+                    {
+                        tmp = tmp * 10 + (int)(date[i] - 48);
+                        i++;
+                    }
+                    if (date[0] <= '0' && date[0] >='9')
+                    {
+                        system("cls");
+                        continue;
+                    }
+                    curmon = tmp;
+                    tmp = 0, i = 0;
+                    system("cls");
+                    if (curmon < 0 || curmon>12)
+                    {
+                        이상한날짜();
+                        Sleep(400);
+                        continue;
+                    }
                     break;
                 }
-                달력달2();
-                scanf_s("%d", &curmon);
-                system("cls");
-                if (curmon < 0 || curmon>12)
+                if (strcmp(date, "exit") == 0)
                 {
-                    이상한날짜();
-                    Sleep(400);
-                    break;
+                    system("cls");
+                    continue;
                 }
             }
             else
@@ -255,7 +291,7 @@ void calender()
             scanf_s("%s", date, MAX);
             if (strcmp(date, "exit") == 0)
             {
-                break;
+                continue;
             }
             while (date)
             {
@@ -324,6 +360,7 @@ void calender()
                 break;
             }
             system("cls");
+            j = 0;
             for (i = 0; i < times; i++)
             {
                 if (year == fry[i] && month == frm[i] && day == frd[i])
@@ -331,6 +368,11 @@ void calender()
                     j++;
                     저장된내용(frs[i], j);
                 }
+            }
+
+            if (j == 0)
+            {
+                데이터x();
             }
             printf("\n");
             system("pause");
