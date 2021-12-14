@@ -6,6 +6,7 @@ int first()
 	option=main_screen();
 	return option;
 }
+
 int main()
 {
 	int option;
@@ -24,7 +25,7 @@ int main()
 	}
 	else if (option == 4)
 	{
-
+		grade_main();
 	}
 	else if (option == 5)
 	{
