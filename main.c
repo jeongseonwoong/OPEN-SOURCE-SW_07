@@ -25,7 +25,17 @@ int main()
 		}
 		else if (option == 5)
 		{
+			printf("시간표 기능\n");
+			time_table();
+			system("cls");
 
+			int size = find_subject();
+			printf("\n\n");
+			printf("[과목들]\n");
+			for (int i = 0; i < size; i++)
+			{
+				printf("%02d. %s\n", i + 1, index[i].subject);
+			}
 		}
 		else if (option == 6)
 		{
