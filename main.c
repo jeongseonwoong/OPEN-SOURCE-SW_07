@@ -17,15 +17,10 @@ int main()
 		}
 		else if (option == 3)
 		{
-			choice();
-		}
-		else if (option == 4)
-		{
-			grade_main();
-		}
-		else if (option == 5)
-		{
-			printf("시간표 기능\n");
+			system("cls");
+			interface_word("시간표 기능", "");
+			Sleep(TIME*2);
+			system("cls");
 			time_table();
 			system("cls");
 
@@ -36,6 +31,16 @@ int main()
 			{
 				printf("%02d. %s\n", i + 1, index[i].subject);
 			}
+			Sleep(TIME*3);
+			system("cls");
+		}
+		else if (option == 4)
+		{
+			grade_main();
+		}
+		else if (option == 5)
+		{
+			choice();
 		}
 		else if (option == 6)
 		{
