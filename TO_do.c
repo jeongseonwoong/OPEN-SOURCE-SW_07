@@ -37,7 +37,7 @@ void to_do(FILE* fp)
 
 }
 
-void choice(FILE* fp)
+void choice()
 {
 	system("cls");
 	int num = 0;
