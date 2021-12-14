@@ -7,8 +7,8 @@ int dday2()
 		system("cls");
 		FILE* fp3;
 		FILE* fpaddsche;
-		int selec2, tmp = 0, i = 0,j=0, year1, month1, day1, pyear, pmonth, pday, year, month, day,fry[MAX],frm[MAX],frd[MAX],times=0;
-		char testday[MAX], testname[MAX],frs[MAX][MAX];
+		int selec2, tmp = 0, i = 0,j=0, year1, month1, day1, pyear, pmonth, pday, year, month, day,fry[MAX],frm[MAX],frd[MAX],times=0,fdelete;
+		char testday[MAX], testname[MAX],frs[MAX][MAX],fdelete1[MAX];
 		time_t timer = 0;
 		struct tm t;
 		timer = time(NULL);
@@ -158,14 +158,44 @@ int dday2()
 					f++;
 				}
 				fclose(fp3);
-				printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
-
-				for (file = 0; file < fsave; file++)
+				while (1)
 				{
-					printf("[%d]:%d년 %d월 %d일부터  %s시험까지 %d년 %d월 %d일 남았었습니다.\n",file+1, f1[file], f2[file], f3[file], fname[file], f4[file], f5[file], f6[file]);
+					printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+					for (file = 0; file < fsave; file++)
+					{
+						printf("[%d]:%d년 %d월 %d일부터  %s시험까지 %d년 %d월 %d일 남았었습니다.\n", file + 1, f1[file], f2[file], f3[file], fname[file], f4[file], f5[file], f6[file]);
+					}
+					printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+					printf("삭제하고 싶은 데이터가 있으시면 해당 데이터의 넘버를 눌러주세요(없으면 0):");
+					scanf_s("%s", fdelete1, MAX);
+					system("cls");
+					tmp = 0; i = 0;
+					while (fdelete1[i] != '\0')
+					{
+						tmp = tmp * 10 + (int)(fdelete1[i] - 48);
+						i++;
+					}
+					if (tmp <= fsave && tmp>=0)
+					{
+						break;
+					}
 				}
-				printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
-
+				fdelete = tmp;
+				tmp = 0, i = 0;
+				if (fdelete != 0 && fp3 != NULL)
+				{
+					fdelete--;
+					fopen_s(&fp3, "savedday2.txt", "w");
+					for (f = 0; f < fdelete; f++)
+					{
+						fprintf(fp3, "%d %d %d %d %d %d %s \n", f1[f], f2[f], f3[f], f4[f], f5[f], f6[f], fname[f]);
+					}
+					for (f = fdelete + 1; f < fsave; f++)
+					{
+						fprintf(fp3, "%d %d %d %d %d %d %s \n", f1[f], f2[f], f3[f], f4[f], f5[f], f6[f], fname[f]);
+					}
+					fclose(fp3);
+				}
 
 			}
 			system("pause");
