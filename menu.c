@@ -24,16 +24,15 @@ int main_screen()
 	{
 		system("cls");
 		printf("\n\n");
-		printf("■■■■■■■■■■■■■■■■■■■\n");
-		printf("■                                  ■\n");
-		printf("■  1. 수능 D-Day, 시험 D-Day	    ■\n");
-		printf("■  2. 요일별 시간대별 수업 설정    ■\n");
-		printf("■  3. 학점 및 성적 계산	    ■\n");
-		printf("■  4. 과목별 진행상황              ■\n");
-		printf("■  5. 달력에 할 일 추가            ■\n");
-		printf("■  6. 메인 화면으로 돌아가기	    ■\n");
-		printf("■                                  ■\n");
-		printf("■■■■■■■■■■■■■■■■■■■\n\n");
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+		printf("■                                                ■\n");
+		printf("■  1. 수능 D-Day, 시험 D-Day, 달력에 할 일 추가  ■\n");
+		printf("■  2. 요일별 시간대별 수업 설정                  ■\n");
+		printf("■  3. 학점 및 성적 계산	                  ■\n");
+		printf("■  4. 과목별 진행상황                            ■\n");
+		printf("■  5. 메인 화면으로 돌아가기	                  ■\n");
+		printf("■                                                ■\n");
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
 		printf("원하시는 번호를 입력하세요>> ");
 		scanf_s("%d", &n);
 		return n;
@@ -52,21 +51,76 @@ int menu(FILE* fp, int num)
 	switch (num)
 	{
 	case 1:
-		printf("D-Day 출력 함수 자리");
+		int select = 0;
+		while (select != 9)
+		{
+			system("cls");
+			printf("실행할 프로그램을 선택하세요\n");
+			printf("수능 d-day (press '1')\n");
+			printf("시간표 (press '2')\n");
+			printf("시험 d-dya(press '3')\n");
+			printf("끝내기(press '9')\n");
+			scanf_s("%d", &select);
+			if (select == 1)
+			{
+				dday();
+			}
+			else if (select == 2)
+			{
+				calender();
+			}
+			else if (select == 3)
+			{
+				dday2();
+			}
+		}
 		break;
 	case 2:
-		printf("요일별 시간대별 수업 설정 함수 자리");
+		time_table();
+		system("cls");
+
+		int size = find_subject();
+		printf("\n\n");
+		printf("[과목들]\n");
+		for (int i = 0; i < size; i++)
+		{
+			printf("%02d. %s\n", i + 1, index[i].subject);
+		}
 		break;
 	case 3:
-		printf("학점 및 성적 계산 함수 자리");
+		system("cls");
+		int a = 0;
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+		printf("■■■■■■■■■■■■■■선택창■■■■■■■■■■■■■■\n");
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+		printf("■■■┌──────────────┐■■■■■■■■■┌──────────────┐■■■\n");
+		printf("■■■│      ■      │■■■■■■■■■│  ■■■■    │■■■\n");
+		printf("■■■│    ■■      │■■■■■■■■■│ ■      ■   │■■■\n");
+		printf("■■■│   ■ ■      │■■■■■■■■■│ ■      ■   │■■■\n");
+		printf("■■■│      ■      │■■■■■■■■■│       ■     │■■■\n");
+		printf("■■■│      ■      │■■■■■■■■■│     ■       │■■■\n");
+		printf("■■■│      ■      │■■■■■■■■■│   ■         │■■■\n");
+		printf("■■■│   ■■■■   │■■■■■■■■■│  ■■■■■  │■■■\n");
+		printf("■■■│ 학기별 성적  │■■■■■■■■■│   나의 성적  │■■■\n");
+		printf("■■■│계산 및 입력  │■■■■■■■■■│ 확인 및 관리 │■■■\n");
+		printf("■■■└──────────────┘■■■■■■■■■└──────────────┘■■■\n");
+		printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n");
+		printf("\n원하는 기능의 번호 입력 >> ");
+
+		scanf_s(" %d", &a);
+		if (a == 1) {
+			my_grade();
+		}
+		if (a == 2) {
+			grade_manage();
+		}
+		else printf("제공되지 않는 기능입니다.");
+
 		break;
 	case 4:
 		choice(fp);
 		break;
 	case 5:
-		printf("달력에 날짜마다 할 일 추가 함수 자리");
-		break;
-	case 6:
 		main_screen();
 		break;
 	default:
