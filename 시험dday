@@ -1,0 +1,266 @@
+#include"학습프로그램.h"
+int dday2()
+{
+	int select = 1;
+	while (select != 4)
+	{
+		system("cls");
+		FILE* fp3;
+		FILE* fpaddsche;
+		int selec2, tmp = 0, i = 0,j=0, year1, month1, day1, pyear, pmonth, pday, year, month, day,fry[MAX],frm[MAX],frd[MAX],times=0,fdelete;
+		char testday[MAX], testname[MAX],frs[MAX][MAX],fdelete1[MAX];
+		time_t timer = 0;
+		struct tm t;
+		timer = time(NULL);
+		localtime_s(&t, &timer);
+		pyear = t.tm_year + 1900;
+		pmonth = t.tm_mon + 1;
+		pday = t.tm_mday;
+		printf("시험 D-Day\n");
+		printf("오늘은 %d년 %d월 %d일입니다.\n", t.tm_year + 1900, t.tm_mon + 1, t.tm_mday);
+		시험();
+		scanf_s("%d", &select);
+		while (select == 1)
+		{
+			i = 0;
+			시험날짜();
+			scanf_s("%s", testday, MAX);
+			system("cls");
+			tmp = 0;
+			while (testday[i] != '-'&&i<4)
+			{
+				tmp = tmp * 10 + (int)(testday[i] - 48);
+				i++;
+			}
+			i++;
+			year1 = tmp;
+			tmp = 0;
+			while (testday[i] != '-'&&i<7)
+			{
+				tmp = tmp * 10 + (int)(testday[i] - 48);
+				i++;
+			}
+			month1 = tmp;
+			tmp = 0;
+			i++;
+			while (testday[i] != '\0'&&i<10)
+			{
+				tmp = tmp * 10 + (int)(testday[i] - 48);
+				i++;
+			}
+			day1 = tmp;
+			if(year1 > 2100 || month1 == NULL || day1 == NULL)
+			{
+				continue;
+			}
+			if (testday[0] > '2' || testday[1] > '0' || testday[2] > '2' || testday[3] > '6' || testday[5] > '1' || testday[8] > '3' || testday[4] != '-' || testday[7] != '-')
+			{
+				continue;
+			}
+			if (month1 > 12)
+			{
+				continue;
+			}
+			if (month1 == 1 || month1 == 3 || month1 == 5 || month1 == 7 || month1 == 8 || month1 == 10 || month1 == 12)
+			{
+				if (day1 > 31)
+				{
+					continue;
+				}
+			}
+			if (month1 == 4 || month1 == 6 || month1 == 9 || month1 == 11)
+			{
+				if (day1 > 30)
+				{
+					continue;
+				}
+			}
+			if (month1 == 2)
+			{
+				if (day1 > 28)
+				{
+					continue;
+				}
+			}
+			year = year1 - pyear;
+			month = month1 - pmonth;
+			day = day1 - pday;
+			시험이름();
+			scanf_s("%s", testname, MAX);
+			system("cls");
+			if (day < 0)
+			{
+				if (pmonth == 5 || pmonth == 7 || pmonth == 10 || pmonth == 12)
+				{
+					month--;
+					day = 31 + day;
+				}
+				else if (pmonth == 3)
+				{
+					month--;
+					day = 28 + day;
+				}
+				else
+				{
+					month--;
+					day = 3 + day;
+				}
+			}
+			if (month < 0)
+			{
+				year--;
+				month = 12 + month;
+			}
+
+			if (year < 0)
+			{
+				이미지나간시험날짜();
+			}
+			else
+			{
+				얼마나남았습니다(year,month,day);
+				데이터저장여부();
+				scanf_s("%d", &selec2);
+				system("cls");
+
+				if (selec2 == 1)
+				{
+
+					fopen_s(&fp3, "savedday2.txt", "a");
+					if (fp3 != NULL)
+					{
+						fprintf(fp3, "%d %d %d %d %d %d %s\n", pyear, pmonth, pday, year, month, day, testname);
+						fclose(fp3);
+						저장되었습니다();
+						Sleep(300);
+						system("cls");
+					}
+				}
+			}
+			system("pause");
+			break;
+		}
+		if (select == 2)
+		{
+			int f1[MAX], f2[MAX], f3[MAX], f4[MAX], f5[MAX], f6[MAX], save = 0, f = 0, file = 0, fsave = 0;
+			char fname[MAX][MAX];
+			fopen_s(&fp3, "savedday2.txt", "r");
+			if (fp3 == NULL)
+			{
+				데이터x();
+			}
+			else
+			{
+				데이터o();
+				while (fscanf_s(fp3, "%d %d %d %d %d %d %s", &f1[fsave], &f2[fsave], &f3[fsave], &f4[fsave], &f5[fsave], &f6[fsave], fname[fsave], MAX) != EOF)
+				{
+					fsave++;
+					f++;
+				}
+				fclose(fp3);
+				while (1)
+				{
+					printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+					for (file = 0; file < fsave; file++)
+					{
+						printf("[%d]:%d년 %d월 %d일부터  %s시험까지 %d년 %d월 %d일 남았었습니다.\n", file + 1, f1[file], f2[file], f3[file], fname[file], f4[file], f5[file], f6[file]);
+					}
+					printf("■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■\n\n");
+					printf("삭제하고 싶은 데이터가 있으시면 해당 데이터의 넘버를 눌러주세요(없으면 0):");
+					scanf_s("%s", fdelete1, MAX);
+					system("cls");
+					tmp = 0; i = 0;
+					while (fdelete1[i] != '\0')
+					{
+						tmp = tmp * 10 + (int)(fdelete1[i] - 48);
+						i++;
+					}
+					if (tmp <= fsave && tmp>=0)
+					{
+						break;
+					}
+				}
+				fdelete = tmp;
+				tmp = 0, i = 0;
+				if (fdelete != 0 && fp3 != NULL)
+				{
+					fdelete--;
+					fopen_s(&fp3, "savedday2.txt", "w");
+					for (f = 0; f < fdelete; f++)
+					{
+						fprintf(fp3, "%d %d %d %d %d %d %s \n", f1[f], f2[f], f3[f], f4[f], f5[f], f6[f], fname[f]);
+					}
+					for (f = fdelete + 1; f < fsave; f++)
+					{
+						fprintf(fp3, "%d %d %d %d %d %d %s \n", f1[f], f2[f], f3[f], f4[f], f5[f], f6[f], fname[f]);
+					}
+					fclose(fp3);
+				}
+
+			}
+			system("pause");
+			system("cls");
+		}
+		else if (select == 3)
+		{
+			system("cls");
+			fopen_s(&fpaddsche, "addschedule.txt", "r");
+			if (fpaddsche != NULL)
+			{
+				int dyear, dmonth, dday;
+				i = 0;
+				while (fscanf_s(fpaddsche, "%d %d %d %s", &fry[i], &frm[i], &frd[i], frs[i], MAX) != EOF)
+				{
+					if (strstr(frs[i], "시험")!=NULL)
+					{
+						dyear = fry[i] - (t.tm_year + 1900);
+						dmonth = frm[i] - (t.tm_mon + 1);
+						dday = frd[i] - t.tm_mday;
+						if (dday < 0)
+						{
+							if (pmonth == 5 || pmonth == 7 || pmonth == 10 || pmonth == 12)
+							{
+								dmonth--;
+								dday = 31 + dday;
+				 		    }
+							else if (pmonth == 3)
+							{
+								dmonth--;
+								dday = 28 + dday;
+							}
+							else
+							{
+								dmonth--;
+								dday = 3 + dday;
+							}
+						}
+						if (dmonth < 0)
+						{
+							dyear--;
+							dmonth = 12 + dmonth;
+						}
+						if (dyear < 0)
+						{
+							이미지나간시험날짜();
+						}
+						else {
+							저장된시험(dyear,dmonth,dday,frs[i]);
+						}
+					}
+					i++;
+					times++;
+				}
+			}
+			if (fpaddsche != NULL)
+			{
+				fclose(fpaddsche);
+			}
+			system("pause");
+		}
+		else if (select == 4)
+		{
+			return 0;
+		}
+	}
+
+}
