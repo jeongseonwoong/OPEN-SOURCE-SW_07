@@ -116,7 +116,7 @@ void calender()
     {
         system("cls");
         int selectopt, selectopt2, selectopt3, year, curmon, month, day, goweekend = 0, start, i = 0, j = 0, data[MAX] = { 0 }, k = 2, fry[MAX], frm[MAX], frd[MAX], times = 0, print = 0,tmp;
-        char date[MAX], frs[MAX][MAX];
+        char date[MAX], frs[MAX][MAX],fdelete1[MAX];
         time_t timer = 0;
         struct tm t;
         timer = time(NULL);
@@ -369,10 +369,29 @@ void calender()
                     저장된내용(frs[i], j);
                 }
             }
-
             if (j == 0)
             {
                 데이터x();
+            }
+            else
+            {
+                printf("\n삭제하고 싶은 데이터가 있으시면 해당 데이터의 일정을 입력해 주세요(없으면 exit):");
+                scanf_s("%s", fdelete1, MAX);
+                if (strcmp(fdelete1, "exit") != 0)
+                {
+                    fopen_s(&fpaddsche, "addschedule.txt", "w");
+                    for (i = 0; i < times; i++)
+                    {
+                        if (strstr(frs[i], fdelete1) == 0)
+                        {
+                            fprintf(fpaddsche, "%d %d %d %s\n", fry[i], frm[i], frd[i], frs[i]);
+                        }
+                    }
+                    if (fpaddsche != NULL)
+                    {
+                        fclose(fpaddsche);
+                    }
+                }
             }
             printf("\n");
             system("pause");
