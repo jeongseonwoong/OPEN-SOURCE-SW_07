@@ -1,5 +1,8 @@
 #include "menu.h"
 #include "func.h"
+#include "학습프로그램.h"
+#include "헤더.h"
+#include "Time_table.h"
 
 void maintitle()
 {
