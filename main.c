@@ -17,7 +17,7 @@ int main()
 		}
 		else if (option == 3)
 		{
-
+			choice();
 		}
 		else if (option == 4)
 		{
