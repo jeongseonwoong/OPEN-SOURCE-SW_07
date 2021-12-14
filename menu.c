@@ -23,12 +23,18 @@ int main_screen()
 	if (n == 1)
 	{
 		system("cls");
-		printf("1. 수능 D-Day, 시험 D-Day\n");
-		printf("2. 요일별 시간대별 수업 설정\n");
-		printf("3. 학점 및 성적 계산\n");
-		printf("4. 과목별 진행상황\n");
-		printf("5. 달력에 날짜마다 할 일 추가\n");
-		printf("6. 메인 화면으로 돌아가기\n>>");
+		printf("\n\n");
+		printf("####################################\n");
+		printf("#                                  #\n");
+		printf("#  1. 수능 D-Day, 시험 D-Day	   #\n");
+		printf("#  2. 요일별 시간대별 수업 설정    #\n");
+		printf("#  3. 학점 및 성적 계산		   #\n");
+		printf("#  4. 과목별 진행상황              #\n");
+		printf("#  5. 달력에 할 일 추가            #\n");
+		printf("#  6. 메인 화면으로 돌아가기	   #\n");
+		printf("#                                  #\n");
+		printf("####################################\n\n");
+		printf("원하시는 번호를 입력하세요>> ");
 		scanf_s("%d", &n);
 		return n;
 	}
