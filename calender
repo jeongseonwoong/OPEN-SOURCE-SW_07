@@ -1,4 +1,4 @@
-#include "학습프로그램.h"
+#include "헤더.h"
 FILE* fpaddsche;
 int startday(int year)
 {
@@ -10,7 +10,7 @@ int startday(int year)
 
 int adddate(char date[MAX])
 {
-    int i = 0,tmp,year,month,day;
+    int i = 0, tmp, year, month, day;
     char savef[MAX];
     달력저장날짜();
     scanf_s("%s", date, MAX);
@@ -24,7 +24,7 @@ int adddate(char date[MAX])
         {
             return 1;
         }
-        tmp = 0,i=0;
+        tmp = 0, i = 0;
         for (i = 0; i < 4; i++)
         {
             tmp = tmp * 10 + (int)(date[i] - 48);
@@ -89,7 +89,7 @@ int adddate(char date[MAX])
         fopen_s(&fpaddsche, "addschedule.txt", "a");
         if (fpaddsche != NULL)
         {
-            if (strcmp(savef,"exit")== 0)
+            if (strcmp(savef, "exit") == 0)
             {
                 printf("기존 화면으로 이동중..");
                 Sleep(700);
@@ -115,8 +115,8 @@ void calender()
     while (1)
     {
         system("cls");
-        int selectopt, selectopt2, selectopt3, year, curmon, month, day, goweekend = 0, start, i = 0, j = 0, data[MAX] = { 0 }, k = 2, fry[MAX], frm[MAX], frd[MAX], times = 0, print = 0,tmp;
-        char date[MAX], frs[MAX][MAX],fdelete1[MAX];
+        int selectopt, selectopt2, selectopt3, year, curmon, month, day, goweekend = 0, start, i = 0, j = 0, data[MAX] = { 0 }, k = 2, fry[MAX], frm[MAX], frd[MAX], times = 0, print = 0, tmp;
+        char date[MAX], frs[MAX][MAX], fdelete1[MAX];
         time_t timer = 0;
         struct tm t;
         timer = time(NULL);
@@ -141,7 +141,7 @@ void calender()
         while (selectopt == 1)
         {
             k = 1;
-            달력년도(t.tm_year + 1900,t.tm_mon+1);
+            달력년도(t.tm_year + 1900, t.tm_mon + 1);
             scanf_s("%d", &selectopt2);
             system("cls");
             if (selectopt2 == 1)
@@ -184,7 +184,7 @@ void calender()
                         tmp = tmp * 10 + (int)(date[i] - 48);
                         i++;
                     }
-                    if (date[0] <= '0' && date[0] >='9')
+                    if (date[0] <= '0' && date[0] >= '9')
                     {
                         system("cls");
                         continue;
@@ -277,12 +277,12 @@ void calender()
 
         while (selectopt == 2)
         {
-           int result;
-           result= adddate(date);
-           if (result == 1)
-           {
-               break;
-           }
+            int result;
+            result = adddate(date);
+            if (result == 1)
+            {
+                break;
+            }
         }
         if (selectopt == 3)
         {
@@ -295,6 +295,10 @@ void calender()
             }
             while (date)
             {
+                if (strcmp(date, "exit") == 0)
+                {
+                    break;
+                }
                 tmp = 0, i = 0;
                 for (i = 0; i < 4; i++)
                 {
@@ -357,7 +361,12 @@ void calender()
                 {
                     break;
                 }
+
                 break;
+            }
+            if (strcmp(date, "exit") == 0)
+            {
+                continue;
             }
             system("cls");
             j = 0;
@@ -397,7 +406,7 @@ void calender()
             system("pause");
             system("cls");
         }
-        else if(selectopt==4)
+        else if (selectopt == 4)
         {
             break;
         }
