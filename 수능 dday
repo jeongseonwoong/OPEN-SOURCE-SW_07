@@ -1,4 +1,4 @@
-#include "학습프로그램.h"
+#include "헤더.h"
 int dday()
 {
 	int recursive = 1;
@@ -9,9 +9,9 @@ int dday()
 		Sleep(500);
 		system("cls");
 		FILE* fpdday;
-		int i = 0, j = 0, f = 0, file=0;
-		char suneong[MAX], date[MAX],fdelete1[MAX];
-		int year=0, month=0, day=0, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, fsave = 0, fdelete = 100, interchoose;// 2021-11-06
+		int i = 0, j = 0, f = 0, file = 0;
+		char suneong[MAX], date[MAX], fdelete1[MAX];
+		int year = 0, month = 0, day = 0, tmp = 0, sum = 0, syear = 1, smonth = 0, sday = 1, fsave = 0, fdelete = 100, interchoose;// 2021-11-06
 		int f1[MAX], f2[MAX], f3[MAX], f4[MAX], f5[MAX], f6[MAX], f7[MAX], s1, s2, s3, s4, s5, s6, s7;
 		const char s2022[MAX] = "2021-11-18";
 		const char s2023[MAX] = "2022-11-17";
@@ -62,7 +62,7 @@ int dday()
 							tmp = tmp * 10 + (int)(fdelete1[i] - 48);
 							i++;
 						}
-						if (tmp < fsave && tmp >= 0)
+						if (tmp <= fsave && tmp >= 0)
 						{
 							break;
 						}
@@ -71,7 +71,7 @@ int dday()
 					tmp = 0, i = 0;
 
 				}
-				if (fdelete!=0 && fpdday != NULL)
+				if (fdelete != 0 && fpdday != NULL)
 				{
 					fdelete--;
 					fopen_s(&fpdday, "savedday.txt", "w");
@@ -248,7 +248,7 @@ int dday()
 				s5 = year;
 				s6 = month;
 				s7 = day;
-				얼마나남았습니다(year,month,day);
+				얼마나남았습니다(year, month, day);
 				데이터저장여부();
 				scanf_s("%d", &fsave);
 				fopen_s(&fpdday, "savedday.txt", "a");
@@ -265,7 +265,7 @@ int dday()
 		{
 			임의의날짜입력();
 			scanf_s("%s", date, MAX);
-			while (strcmp(date,"exit")!=0)
+			while (strcmp(date, "exit") != 0)
 			{
 				tmp = 0;
 				for (i = 0; i < 4; i++)
@@ -324,7 +324,7 @@ int dday()
 						continue;
 					}
 				}
-					break;
+				break;
 			}
 			if (strcmp(date, "exit") == 0)
 			{
@@ -427,7 +427,7 @@ int dday()
 			}
 			else
 			{
-				얼마나남았습니다(year,month,day);
+				얼마나남았습니다(year, month, day);
 				s5 = year;
 				s6 = month;
 				s7 = day;
@@ -455,6 +455,5 @@ int dday()
 			break;
 		}
 	}
-
 	return 0;
 }
