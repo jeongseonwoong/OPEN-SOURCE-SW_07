@@ -1,4 +1,4 @@
-#include"학습프로그램.h"
+#include"헤더.h"
 int dday2()
 {
 	int select = 1;
@@ -7,8 +7,8 @@ int dday2()
 		system("cls");
 		FILE* fp3;
 		FILE* fpaddsche;
-		int selec2, tmp = 0, i = 0,j=0, year1, month1, day1, pyear, pmonth, pday, year, month, day,fry[MAX],frm[MAX],frd[MAX],times=0,fdelete;
-		char testday[MAX], testname[MAX],frs[MAX][MAX],fdelete1[MAX];
+		int selec2, tmp = 0, i = 0, j = 0, year1, month1, day1, pyear, pmonth, pday, year, month, day, fry[MAX], frm[MAX], frd[MAX], times = 0, fdelete;
+		char testday[MAX], testname[MAX], frs[MAX][MAX], fdelete1[MAX];
 		time_t timer = 0;
 		struct tm t;
 		timer = time(NULL);
@@ -31,7 +31,7 @@ int dday2()
 			}
 			system("cls");
 			tmp = 0;
-			while (testday[i] != '-'&&i<4)
+			while (testday[i] != '-' && i < 4)
 			{
 				tmp = tmp * 10 + (int)(testday[i] - 48);
 				i++;
@@ -39,7 +39,7 @@ int dday2()
 			i++;
 			year1 = tmp;
 			tmp = 0;
-			while (testday[i] != '-'&&i<7)
+			while (testday[i] != '-' && i < 7)
 			{
 				tmp = tmp * 10 + (int)(testday[i] - 48);
 				i++;
@@ -47,13 +47,13 @@ int dday2()
 			month1 = tmp;
 			tmp = 0;
 			i++;
-			while (testday[i] != '\0'&&i<10)
+			while (testday[i] != '\0' && i < 10)
 			{
 				tmp = tmp * 10 + (int)(testday[i] - 48);
 				i++;
 			}
 			day1 = tmp;
-			if(year1 > 2100 || month1 == NULL || day1 == NULL)
+			if (year1 > 2100 || month1 == NULL || day1 == NULL)
 			{
 				continue;
 			}
@@ -126,7 +126,7 @@ int dday2()
 			}
 			else
 			{
-				얼마나남았습니다(year,month,day);
+				얼마나남았습니다(year, month, day);
 				데이터저장여부();
 				scanf_s("%d", &selec2);
 				system("cls");
@@ -183,7 +183,7 @@ int dday2()
 						tmp = tmp * 10 + (int)(fdelete1[i] - 48);
 						i++;
 					}
-					if (tmp <= fsave && tmp>=0)
+					if (tmp <= fsave && tmp >= 0)
 					{
 						break;
 					}
@@ -219,7 +219,7 @@ int dday2()
 				i = 0;
 				while (fscanf_s(fpaddsche, "%d %d %d %s", &fry[i], &frm[i], &frd[i], frs[i], MAX) != EOF)
 				{
-					if (strstr(frs[i], "시험")!=NULL)
+					if (strstr(frs[i], "시험") != 0)
 					{
 						dyear = fry[i] - (t.tm_year + 1900);
 						dmonth = frm[i] - (t.tm_mon + 1);
@@ -230,7 +230,7 @@ int dday2()
 							{
 								dmonth--;
 								dday = 31 + dday;
-				 		    }
+							}
 							else if (pmonth == 3)
 							{
 								dmonth--;
